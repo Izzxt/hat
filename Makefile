@@ -2,7 +2,7 @@ run:
 	go run cmd/hat/hat.go
 
 test:
-	go test -v \./...
+	go test -v -race \./...
 
 build:
 	go build -o bin/hat ./cmd/hat/hat.go
