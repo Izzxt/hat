@@ -104,6 +104,8 @@ func (g *Downloader) Download() {
 		linkUrl = fmt.Sprintf("https://images.habbo.%s/dcr/hof_furni/%s/%s", g.domain, g.revision, g.fileName)
 	} else if g.isImages {
 		linkUrl = fmt.Sprintf("https://images.habbo.%s/c_images%s/%s", g.domain, g.pathUrl, g.fileName)
+	} else if g.isOther {
+		linkUrl = fmt.Sprintf("https://images.habbo.%s%s/%s", g.domain, g.pathUrl, g.fileName)
 	} else {
 		linkUrl = fmt.Sprintf("https://www.habbo.%s/gamedata%s", g.domain, g.pathUrl)
 	}
@@ -141,14 +143,13 @@ func (g *Downloader) Download() {
 
 	defer resp.Body.Close()
 
-	size, err := io.Copy(file, resp.Body)
-	if err != nil {
+	if _, err := io.Copy(file, resp.Body); err != nil {
 		log.Fatal(err)
 	}
 
 	defer file.Close()
 
-	fmt.Printf("Downloaded a file %s with size %d", fileName, size)
+	// fmt.Printf("Downloaded a file %s with size %d", fileName, size)
 }
 
 func (g *Downloader) GetCurrentProduction() string {
