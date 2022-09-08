@@ -193,7 +193,7 @@ func TestRegexGetAllAndReplace(t *testing.T) {
 	}
 
 	for _, v := range after {
-		fmt.Println(v)
+		assert.Regexp(regexp.MustCompile(".png"), v)
 	}
 }
 
