@@ -158,6 +158,8 @@ func (g *Downloader) GetCurrentProduction() string {
 
 	resp := g.client.Get(url)
 
+	defer resp.Body.Close()
+
 	bodyBytes, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
@@ -168,6 +170,18 @@ func (g *Downloader) GetCurrentProduction() string {
 	m := r.FindString(string(bodyBytes))
 
 	return m
+}
+
+func (g *Downloader) GetOutput() string {
+	return g.output
+}
+
+func (g *Downloader) GetPath() string {
+	return g.pathUrl
+}
+
+func (g *Downloader) GetProduction() string {
+	return g.production
 }
 
 func (g *Downloader) SetRevision(revision string) {
