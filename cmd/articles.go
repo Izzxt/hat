@@ -5,20 +5,20 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"regexp"
 	"sync"
 
 	"github.com/Izzxt/hat/articles"
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
+	"github.com/Izzxt/hat/fs"
 	"github.com/schollz/progressbar/v3"
 	"github.com/spf13/cobra"
 )
 
 var (
 	name  string
-	wg    sync.WaitGroup
-	mu    sync.Mutex
 	data  []string
 	after []string
 )
@@ -28,6 +28,9 @@ var articlesCmd = &cobra.Command{
 	Use:   "articles",
 	Short: "A brief description of your command",
 	Run: func(cmd *cobra.Command, args []string) {
+		var wg sync.WaitGroup
+		var mu sync.Mutex
+
 		ch := make(chan articles.Result)
 		c := client.NewClient()
 		d := downloader.NewDownloader(c)
@@ -57,28 +60,41 @@ var articlesCmd = &cobra.Command{
 				}
 			}
 
-			defer wg.Wait()
-
 			rg, _ := regexp.Compile(`([\w!@#$%^&*+-])*\.png`)
 			rgmt := regexp.MustCompile(`_thumb.png`)
 
-			for _, d := range data {
-				s := rg.FindAllString(d, -1)
+			for _, a := range data {
+				s := rg.FindAllString(a, -1)
 				for _, tr := range s {
 					r := rgmt.ReplaceAllString(tr, ".png")
-					after = append(after, r)
+
+					ext, err := fs.Exists(fmt.Sprintf("%s%s", d.GetOutput(), r))
+					if err != nil {
+						log.Fatal(err)
+					}
+
+					if ext {
+						fmt.Println("skipped ", r)
+					} else {
+						after = append(after, r)
+					}
 				}
 			}
 
+			defer wg.Wait()
+
 			bar := progressbar.Default(int64(len(after)))
 			for _, v := range after {
-				bar.Add(1)
-				bar.Describe(v)
-				d.SetFileName(v)
-				d.Download()
+				wg.Add(1)
+				go func(v string) {
+					defer wg.Done()
+					bar.Add(1)
+					bar.Describe(v)
+					d.SetFileName(v)
+					d.Download()
+				}(v)
 			}
 		}
-
 	},
 }
 
