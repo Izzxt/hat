@@ -2,6 +2,7 @@ package downloader
 
 import (
 	"encoding/json"
+	"fmt"
 	"testing"
 
 	"github.com/Izzxt/hat/client"
@@ -43,4 +44,14 @@ func TestSetPath(t *testing.T) {
 	expected := "/furnidata_json/0"
 
 	assert.Equal(d.pathUrl, expected)
+}
+
+func TestGetCurrentProduction(t *testing.T) {
+	c := client.NewClient()
+
+	d := NewDownloader(c)
+	d.SetDomain("com")
+	prod := d.GetCurrentProduction()
+
+	fmt.Print(prod)
 }
