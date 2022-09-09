@@ -13,7 +13,6 @@ import (
 
 // gamedataCmd represents the gamedata command
 var (
-	production  string
 	isXml       bool
 	isTxt       bool
 	types       string
@@ -101,8 +100,8 @@ var (
 				current := d.GetCurrentProduction()
 				d.SetProduction(current)
 
-				if production != "" {
-					d.SetProduction(production)
+				if Prod != "" {
+					d.SetProduction(Prod)
 				}
 
 				d.Download()
@@ -114,8 +113,8 @@ var (
 				current := d.GetCurrentProduction()
 				d.SetProduction(current)
 
-				if production != "" {
-					d.SetProduction(production)
+				if Prod != "" {
+					d.SetProduction(Prod)
 				}
 
 				d.Download()
@@ -135,7 +134,6 @@ func init() {
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	gamedataCmd.PersistentFlags().StringVarP(&production, "production", "", "", "habbo production")
 	gamedataCmd.PersistentFlags().BoolVarP(&isXml, "xml", "", false, "Output fetch to xml")
 	gamedataCmd.PersistentFlags().BoolVarP(&isTxt, "txt", "", false, "Output fetch to xml")
 
