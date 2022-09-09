@@ -2,9 +2,11 @@ package clothes
 
 import (
 	"fmt"
+	"log"
 	"sync"
 
 	"github.com/Izzxt/hat/downloader"
+	"github.com/Izzxt/hat/fs"
 )
 
 type Clothes struct {
@@ -26,18 +28,25 @@ func NewClothes(d downloader.Downloader, wg *sync.WaitGroup, mu *sync.Mutex) *Cl
 	}
 }
 
-func (c *Clothes) Download(fileName string) {
+func (c *Clothes) Download(fileName string, out string) {
 	defer c.wg.Done()
 
 	d := c.downloader
 
 	d.SetDomain("com")
-	d.SetDomain("com")
 	d.SetGordon()
-	p := d.GetCurrentProduction()
-	d.SetProduction(p)
+	d.SetProduction(out)
 	d.SetPath("/")
 	d.SetFileName(fmt.Sprintf("%s.swf", fileName))
 
-	d.Download()
+	ext, err := fs.Exists(fmt.Sprintf("%s%s.swf", d.GetOutput(), fileName))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	if ext {
+		fmt.Println("skipped ", fileName)
+	} else {
+		d.Download()
+	}
 }
