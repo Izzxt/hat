@@ -7,6 +7,7 @@ import (
 	"fmt"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/clothes"
@@ -63,6 +64,7 @@ var clothesCmd = &cobra.Command{
 					bar.Describe(fmt.Sprintf("%s.swf", v.Id))
 					cl.Download(fmt.Sprintf("/%s", v.Id), Prod)
 				}(v)
+				time.Sleep(100 * time.Millisecond)
 			}
 		}
 
