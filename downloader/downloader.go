@@ -29,7 +29,7 @@ type Downloader struct {
 	isXml         bool
 	isTxt         bool
 	isSwf         bool
-	Test          string
+	url           string
 }
 
 type Furni struct {
@@ -72,7 +72,7 @@ func (g *Downloader) Fetch() ([]byte, int) {
 		url = fmt.Sprintf("https://www.habbo.%s/gamedata%s", g.domain, g.pathUrl)
 	}
 
-	g.Test = url
+	g.url = url
 
 	rg := regexp.MustCompile("(_json)")
 
@@ -109,6 +109,8 @@ func (g *Downloader) Download() {
 	} else {
 		linkUrl = fmt.Sprintf("https://www.habbo.%s/gamedata%s", g.domain, g.pathUrl)
 	}
+
+	g.url = linkUrl
 
 	rg := regexp.MustCompile("(_json)")
 
@@ -178,6 +180,10 @@ func (g *Downloader) GetOutput() string {
 
 func (g *Downloader) GetPath() string {
 	return g.pathUrl
+}
+
+func (g *Downloader) GetUrl() string {
+	return g.url
 }
 
 func (g *Downloader) GetProduction() string {
