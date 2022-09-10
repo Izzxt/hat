@@ -8,6 +8,7 @@ import (
 	"log"
 	"regexp"
 	"sync"
+	"time"
 
 	"github.com/Izzxt/hat/articles"
 	"github.com/Izzxt/hat/client"
@@ -93,6 +94,7 @@ var articlesCmd = &cobra.Command{
 					d.SetFileName(v)
 					d.Download()
 				}(v)
+				time.Sleep(100 * time.Millisecond)
 			}
 		}
 	},
