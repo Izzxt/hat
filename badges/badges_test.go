@@ -30,9 +30,9 @@ func TestDownloadBadge(t *testing.T) {
 		d.Download()
 	}
 
-	assert.FileExists(fmt.Sprintf("%s.gif", code[0]))
-	assert.FileExists(fmt.Sprintf("%s.gif", code[1]))
-	assert.FileExists(fmt.Sprintf("%s.gif", code[2]))
+	assert.FileExists(fmt.Sprintf("./out/%s.gif", code[0]))
+	assert.FileExists(fmt.Sprintf("./out/%s.gif", code[1]))
+	assert.FileExists(fmt.Sprintf("./out/%s.gif", code[2]))
 }
 
 func TestGetAllCode(t *testing.T) {
