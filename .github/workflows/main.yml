@@ -21,7 +21,7 @@ jobs:
       run: go test -v ./...
 
     - name: Install Go
-      run: make install && hat -h
+      run: make install && hat
 
     - name: Download Habbo.swf
       run: hat habboswf -o ./resource
