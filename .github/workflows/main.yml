@@ -19,14 +19,11 @@ jobs:
     - name: Test
       run: go test -v ./...
 
-    - name: Install
+    - name: Install Go
       run: make install
 
     - name: Download Habbo.swf
-      run: hat habboswf
-
-    - name: List dir
-      run: ls
+      run: hat habboswf -o ./resource
 
     - uses: EndBug/add-and-commit@v7
       with:
