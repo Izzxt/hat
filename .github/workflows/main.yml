@@ -23,11 +23,19 @@ jobs:
     - name: Install Go
       run: make install && hat
 
-    - name: Make resource directory
-      run: mkdir resource
-
     - name: Download Habbo.swf
       run: hat habboswf -o ./resource
 
-    - name: List
-      run: ls resource
+    - uses: EndBug/add-and-commit@v7
+      with:
+        default_author: github_actions
+        add: resource
+
+    - name: Tar files
+      run: tar -cvf resource.tar ./resource
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: Habbo Resource
+        path: resource.tar
