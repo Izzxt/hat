@@ -37,7 +37,7 @@ func (c *Clothes) Download(fileName string, out string) {
 	if d.GetOutput() != "" {
 		d.SetOutput(d.GetOutput())
 	} else {
-		d.SetOutput(fmt.Sprintf("gordon/%s", d.GetProduction()))
+		d.SetOutput(fmt.Sprintf("resource/gordon/%s", d.GetProduction()))
 	}
 	d.SetPath("/")
 	d.SetFileName(fmt.Sprintf("%s.swf", fileName))

@@ -22,10 +22,11 @@ var habboswfCmd = &cobra.Command{
 		d := downloader.NewDownloader(c)
 		d.SetDomain(Domain)
 		p := d.GetCurrentProduction()
+
 		if d.GetOutput() != "" {
 			d.SetOutput(d.GetOutput())
 		} else {
-			d.SetOutput(fmt.Sprintf("gordon/%s", p))
+			d.SetOutput(fmt.Sprintf("resource/gordon/%s", p))
 		}
 
 		d.SetGordon()

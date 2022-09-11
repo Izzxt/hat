@@ -41,7 +41,7 @@ var badgesCmd = &cobra.Command{
 			if d.GetOutput() != "" {
 				d.SetOutput(d.GetOutput())
 			} else {
-				d.SetOutput("c_images/album1584")
+				d.SetOutput("resource/c_images/album1584")
 			}
 			d.SetPath("/c_images/album1584")
 			for _, v := range code {

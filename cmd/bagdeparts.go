@@ -35,7 +35,7 @@ var badgepartsCmd = &cobra.Command{
 			if d.GetOutput() != "" {
 				d.SetOutput(d.GetOutput())
 			} else {
-				d.SetOutput("c_images/Badgeparts/")
+				d.SetOutput("resource/c_images/Badgeparts/")
 			}
 
 			badges := []string{

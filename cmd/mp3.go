@@ -34,7 +34,7 @@ var mp3Cmd = &cobra.Command{
 			if d.GetOutput() != "" {
 				d.SetOutput(d.GetOutput())
 			} else {
-				d.SetOutput("dcr/hof_furni/mp3")
+				d.SetOutput("resource/dcr/hof_furni/mp3")
 			}
 			i := 1
 			run := true

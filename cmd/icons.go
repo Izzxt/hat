@@ -34,7 +34,7 @@ var iconsCmd = &cobra.Command{
 			if d.GetOutput() != "" {
 				d.SetOutput(d.GetOutput())
 			} else {
-				d.SetOutput("c_images/catalogue")
+				d.SetOutput("resource/c_images/catalogue")
 			}
 			i := 1
 			run := true

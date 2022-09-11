@@ -44,7 +44,7 @@ var furniCmd = &cobra.Command{
 				if d.GetOutput() != "" {
 					d.SetOutput(d.GetOutput())
 				} else {
-					d.SetOutput("dcr/hof_furni")
+					d.SetOutput("resource/dcr/hof_furni")
 				}
 				f := furnitures.NewFurnitures(*d, &wg, &mu)
 				i := f.GetFurnis()

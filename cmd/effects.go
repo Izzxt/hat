@@ -45,7 +45,7 @@ var effectsCmd = &cobra.Command{
 			if d.GetOutput() != "" {
 				d.SetOutput(d.GetOutput())
 			} else {
-				d.SetOutput(fmt.Sprintf("gordon/%s", d.GetProduction()))
+				d.SetOutput(fmt.Sprintf("resource/gordon/%s", d.GetProduction()))
 			}
 			var effect xml.EffectMap
 
