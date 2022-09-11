@@ -5,6 +5,7 @@ package cmd
 
 import (
 	"fmt"
+	"os/exec"
 
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
@@ -32,6 +33,10 @@ var habboswfCmd = &cobra.Command{
 		d.SetPath("/")
 		d.SetFileName("/Habbo.swf")
 		d.Download()
+
+		cm, _ := exec.Command("ls").Output()
+		out := string(cm[:])
+		fmt.Print(out)
 	},
 }
 
