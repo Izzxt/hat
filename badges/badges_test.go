@@ -21,7 +21,7 @@ func TestDownloadBadge(t *testing.T) {
 	c := client.NewClient()
 	d := downloader.NewDownloader(c)
 	d.SetOther()
-	d.SetOutput("../out/")
+	d.SetOutput("./out")
 	d.SetDomain("com")
 	d.SetPath("/c_images/album1584")
 
@@ -30,23 +30,23 @@ func TestDownloadBadge(t *testing.T) {
 		d.Download()
 	}
 
-	assert.FileExists(fmt.Sprintf("../out/%s.gif", code[0]))
-	assert.FileExists(fmt.Sprintf("../out/%s.gif", code[1]))
-	assert.FileExists(fmt.Sprintf("../out/%s.gif", code[2]))
+	assert.FileExists(fmt.Sprintf("./out/%s.gif", code[0]))
+	assert.FileExists(fmt.Sprintf("./out/%s.gif", code[1]))
+	assert.FileExists(fmt.Sprintf("./out/%s.gif", code[2]))
 }
 
 func TestGetAllCode(t *testing.T) {
 	var wg *sync.WaitGroup
 	var mu *sync.Mutex
 
-	assert := assert.New(t)
+	// assert := assert.New(t)
 	c := client.NewClient()
 	d := downloader.NewDownloader(c)
 	b := NewBadges(*d, wg, mu)
 
 	code := b.GetAllCode()
 
-	assert.Equal(144268, len(code))
+	fmt.Printf("%d Badges", len(code))
 }
 
 func TestMatchRegex(t *testing.T) {
