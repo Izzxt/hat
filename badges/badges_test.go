@@ -2,6 +2,7 @@ package badges
 
 import (
 	"fmt"
+	"os/exec"
 	"sync"
 	"testing"
 
@@ -30,9 +31,17 @@ func TestDownloadBadge(t *testing.T) {
 		d.Download()
 	}
 
-	assert.FileExists(fmt.Sprintf("./out/%s.gif", code[0]))
-	assert.FileExists(fmt.Sprintf("./out/%s.gif", code[1]))
-	assert.FileExists(fmt.Sprintf("./out/%s.gif", code[2]))
+	cmd, err := exec.Command("ls").Output()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	out := string(cmd[:])
+	fmt.Println(out)
+
+	assert.FileExists(fmt.Sprintf("%s.gif", code[0]))
+	assert.FileExists(fmt.Sprintf("%s.gif", code[1]))
+	assert.FileExists(fmt.Sprintf("%s.gif", code[2]))
 }
 
 func TestGetAllCode(t *testing.T) {
