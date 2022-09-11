@@ -19,5 +19,8 @@ jobs:
     - name: Test
       run: go test -v ./...
 
-    - name: Build
-      run: go build -v ./...
+    - name: Install
+      run: make install
+
+    - name: Test Help
+      run: hat --help

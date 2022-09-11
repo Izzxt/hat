@@ -8,4 +8,4 @@ build:
 	go build -o bin/hat ./cmd/hat/hat.go
 
 install:
-	GOBIN=/home/izzat/go/bin go install ./cmd/hat/hat.go
+	GOBIN=~/go/bin go install ./cmd/hat/hat.go
