@@ -19,18 +19,11 @@ var (
 	gamedataCmd = &cobra.Command{
 		Use:   "gamedata",
 		Short: "A brief description of your command",
-		Long:  `A`,
 		Run: func(cmd *cobra.Command, args []string) {
 			c := client.NewClient()
 			d := downloader.NewDownloader(c)
-
-			if Domain != "" {
-				d.SetDomain(Domain)
-			}
-
-			if Output != "" {
-				d.SetOutput(Output)
-			}
+			d.SetDomain(Domain)
+			d.SetOutput(Output)
 
 			switch strings.Join(args, ",") {
 			case "furnidata":
@@ -120,6 +113,7 @@ var (
 				d.Download()
 
 			default:
+				// TODO: download all
 				fmt.Print(viper.Get("test"))
 				fmt.Print(CfgFile)
 			}

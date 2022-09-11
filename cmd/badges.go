@@ -11,7 +11,6 @@ import (
 	"github.com/Izzxt/hat/badges"
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
-	"github.com/schollz/progressbar/v3"
 	"github.com/spf13/cobra"
 )
 
@@ -39,12 +38,14 @@ var badgesCmd = &cobra.Command{
 			d.Download()
 		} else {
 			code := b.GetAllCode()
+			if d.GetOutput() != "" {
+				d.SetOutput(d.GetOutput())
+			} else {
+				d.SetOutput("c_images/album1584")
+			}
 			d.SetPath("/c_images/album1584")
-			bar := progressbar.Default(int64(len(code)))
 			for _, v := range code {
 				wg.Add(1)
-				bar.Add(1)
-				bar.Describe(v)
 				go func(v string) {
 					defer wg.Done()
 					d.SetFileName(fmt.Sprintf("%s.gif", v))

@@ -13,7 +13,6 @@ import (
 	"github.com/Izzxt/hat/clothes"
 	"github.com/Izzxt/hat/downloader"
 	"github.com/Izzxt/hat/xml"
-	"github.com/schollz/progressbar/v3"
 	"github.com/spf13/cobra"
 )
 
@@ -56,12 +55,9 @@ var clothesCmd = &cobra.Command{
 
 			cl := clothes.NewClothes(*d, &wg, &mu)
 
-			bar := progressbar.Default(int64(len(figure.Lib)))
 			for _, v := range figure.Lib {
 				wg.Add(1)
 				go func(v xml.FigureLib) {
-					bar.Add(1)
-					bar.Describe(fmt.Sprintf("%s.swf", v.Id))
 					cl.Download(fmt.Sprintf("/%s", v.Id), Prod)
 				}(v)
 				time.Sleep(100 * time.Millisecond)
