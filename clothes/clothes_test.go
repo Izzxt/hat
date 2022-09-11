@@ -2,6 +2,7 @@ package clothes
 
 import (
 	"fmt"
+	"os/exec"
 	"regexp"
 	"strings"
 	"sync"
@@ -74,6 +75,14 @@ func TestDownload(t *testing.T) {
 		wg.Add(1)
 		go cl.Download(fmt.Sprintf("/%s", data[i]), "")
 	}
+
+	cmd, err := exec.Command("ls").Output()
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	out := string(cmd[:])
+	fmt.Println(out)
 
 	assert.FileExists(fmt.Sprintf("./out/%s.swf", "hh_people_pool"))
 

@@ -2,7 +2,6 @@ package badges
 
 import (
 	"fmt"
-	"os/exec"
 	"sync"
 	"testing"
 
@@ -27,17 +26,9 @@ func TestDownloadBadge(t *testing.T) {
 	d.SetPath("/c_images/album1584")
 
 	for _, v := range code {
-		d.SetFileName(fmt.Sprintf("%s.gif", v))
+		d.SetFileName(fmt.Sprintf("/%s.gif", v))
 		d.Download()
 	}
-
-	cmd, err := exec.Command("ls").Output()
-	if err != nil {
-		fmt.Println(err)
-	}
-
-	out := string(cmd[:])
-	fmt.Println(out)
 
 	assert.FileExists(fmt.Sprintf("%s.gif", code[0]))
 	assert.FileExists(fmt.Sprintf("%s.gif", code[1]))
