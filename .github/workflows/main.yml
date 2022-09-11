@@ -22,5 +22,10 @@ jobs:
     - name: Install
       run: make install
 
-    - name: Test Help
-      run: hat --help
+    - name: Download Habbo.swf
+      run: hat habboswf
+
+    - uses: EndBug/add-and-commit@v7
+      with:
+        default_author: github_actions
+        add: resource

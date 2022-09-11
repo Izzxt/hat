@@ -4,6 +4,8 @@ Copyright © 2022 NAME HERE <EMAIL ADDRESS>
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
 	"github.com/spf13/cobra"
@@ -17,14 +19,18 @@ var habboswfCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		c := client.NewClient()
 		d := downloader.NewDownloader(c)
-		d.SetOutput(Output)
 		d.SetDomain(Domain)
+		p := d.GetCurrentProduction()
+		if d.GetOutput() != "" {
+			d.SetOutput(d.GetOutput())
+		} else {
+			d.SetOutput(fmt.Sprintf("gordon/%s", p))
+		}
 
 		d.SetGordon()
-		p := d.GetCurrentProduction()
 		d.SetProduction(p)
 		d.SetPath("/")
-		d.SetFileName("Habbo.swf")
+		d.SetFileName("/Habbo.swf")
 		d.Download()
 	},
 }
