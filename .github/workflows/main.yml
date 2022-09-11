@@ -30,4 +30,4 @@ jobs:
       run: hat habboswf -o ./resource
 
     - name: List
-      run: ls
+      run: ls resource
