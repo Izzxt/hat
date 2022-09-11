@@ -1,4 +1,4 @@
-name: Go
+name: 'Habbo Resource'
 
 on:
   push:
@@ -25,6 +25,36 @@ jobs:
 
     - name: Download Habbo.swf
       run: hat habboswf -o ./resource
+
+    - name: Download Articles
+      run: hat articles -o ./resource
+
+    - name: Download Clothes
+      run: hat clothes -o ./resource
+
+    - name: Download Furnitures Icons
+      run: hat furni icons -o ./resource
+
+    - name: Download Furnitures
+      run: hat furni -o ./resource
+
+    - name: Download Badges
+      run: hat badges -o ./resource
+
+    - name: Download Effects
+      run: hat effects -o ./resource
+
+    - name: Download Badgeparts
+      run: hat badgeparts -o ./resource
+
+    - name: Download MP3
+      run: hat mp3 -o ./resource
+
+    - name: Download Icons
+      run: hat icons -o ./resource
+
+    - name: Download Pets
+      run: hat mp3 -o ./resource
 
     - uses: EndBug/add-and-commit@v7
       with:
