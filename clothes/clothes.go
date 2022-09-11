@@ -2,11 +2,9 @@ package clothes
 
 import (
 	"fmt"
-	"log"
 	"sync"
 
 	"github.com/Izzxt/hat/downloader"
-	"github.com/Izzxt/hat/fs"
 )
 
 type Clothes struct {
@@ -36,17 +34,13 @@ func (c *Clothes) Download(fileName string, out string) {
 	d.SetDomain("com")
 	d.SetGordon()
 	d.SetProduction(out)
+	if d.GetOutput() != "" {
+		d.SetOutput(d.GetOutput())
+	} else {
+		d.SetOutput(fmt.Sprintf("gordon/%s", d.GetProduction()))
+	}
 	d.SetPath("/")
 	d.SetFileName(fmt.Sprintf("%s.swf", fileName))
 
-	ext, err := fs.Exists(fmt.Sprintf("%s%s.swf", d.GetOutput(), fileName))
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	if ext {
-		fmt.Println("skipped ", fileName)
-	} else {
-		d.Download()
-	}
+	d.Download()
 }

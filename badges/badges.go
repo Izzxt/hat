@@ -2,12 +2,10 @@ package badges
 
 import (
 	"fmt"
-	"log"
 	"regexp"
 	"sync"
 
 	"github.com/Izzxt/hat/downloader"
-	"github.com/Izzxt/hat/fs"
 )
 
 type Badges struct {
@@ -41,14 +39,7 @@ func (b *Badges) GetAllCode() []string {
 		byte, _ := dw.Fetch()
 		match := matchRegex(string(byte))
 		for _, v := range match {
-			exts, err := fs.Exists(fmt.Sprintf("%s%s%s", dw.GetOutput(), v[2], ".gif"))
-			if err != nil {
-				log.Fatal(err)
-			}
-
-			if !exts {
-				code = append(code, v[2])
-			}
+			code = append(code, v[2])
 		}
 	}
 

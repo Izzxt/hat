@@ -11,6 +11,7 @@ import (
 	"strings"
 
 	"github.com/Izzxt/hat/client"
+	"github.com/Izzxt/hat/fs"
 )
 
 type Downloader struct {
@@ -94,7 +95,7 @@ func (g *Downloader) Fetch() ([]byte, int) {
 	return bodyBytes, resp.StatusCode
 }
 
-func (g *Downloader) Download() {
+func (g *Downloader) Download() int {
 	var linkUrl string
 	var fileName string
 
@@ -136,6 +137,18 @@ func (g *Downloader) Download() {
 		fileName = g.fileName
 	}
 
+	if _, err := os.Stat(g.GetOutput()); os.IsNotExist(err) {
+		err := os.MkdirAll(g.GetOutput(), 0777)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
+
+	exts, err := fs.Exists(fmt.Sprintf("%s%s", g.GetOutput(), fileName))
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	file, err := os.Create(g.output + fileName)
 	if err != nil {
 		log.Fatal(err)
@@ -145,12 +158,19 @@ func (g *Downloader) Download() {
 
 	defer resp.Body.Close()
 
-	if _, err := io.Copy(file, resp.Body); err != nil {
-		log.Fatal(err)
+	if exts {
+		r := regexp.MustCompile(`\/`)
+		fmt.Println(fmt.Sprintf("Skipped %s", r.ReplaceAllString(fileName, "")))
+	} else {
+		if _, err := io.Copy(file, resp.Body); err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(fmt.Sprintf("Download %s", fileName))
+
+		defer file.Close()
 	}
 
-	defer file.Close()
-
+	return resp.StatusCode
 	// fmt.Printf("Downloaded a file %s with size %d", fileName, size)
 }
 
@@ -188,6 +208,10 @@ func (g *Downloader) GetUrl() string {
 
 func (g *Downloader) GetProduction() string {
 	return g.production
+}
+
+func (g *Downloader) GetDomain() string {
+	return g.domain
 }
 
 func (g *Downloader) SetRevision(revision string) {

@@ -5,7 +5,6 @@ package cmd
 
 import (
 	"fmt"
-	"log"
 	"regexp"
 	"sync"
 	"time"
@@ -13,7 +12,6 @@ import (
 	"github.com/Izzxt/hat/articles"
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
-	"github.com/Izzxt/hat/fs"
 	"github.com/schollz/progressbar/v3"
 	"github.com/spf13/cobra"
 )
@@ -24,6 +22,7 @@ var (
 	after []string
 )
 
+// todo: use attempt instead
 // articlesCmd represents the articles command
 var articlesCmd = &cobra.Command{
 	Use:   "articles",
@@ -38,7 +37,6 @@ var articlesCmd = &cobra.Command{
 		a := articles.NewArticles(&wg, *d, &mu)
 
 		d.SetDomain(Domain)
-		d.SetOutput(Output)
 		d.SetOther()
 		d.SetPath("/web_images/habbo-web-articles")
 
@@ -46,6 +44,11 @@ var articlesCmd = &cobra.Command{
 			d.SetFileName(fmt.Sprintf("%s.png", name))
 			d.Download()
 		} else {
+			if d.GetOutput() != "" {
+				d.SetOutput(d.GetOutput())
+			} else {
+				d.SetOutput("habbo-web-articles")
+			}
 			fmt.Println("Initializing...")
 			p := a.GetMaxPage()
 
@@ -68,17 +71,7 @@ var articlesCmd = &cobra.Command{
 				s := rg.FindAllString(a, -1)
 				for _, tr := range s {
 					r := rgmt.ReplaceAllString(tr, ".png")
-
-					ext, err := fs.Exists(fmt.Sprintf("%s%s", d.GetOutput(), r))
-					if err != nil {
-						log.Fatal(err)
-					}
-
-					if ext {
-						fmt.Println("skipped ", r)
-					} else {
-						after = append(after, r)
-					}
+					after = append(after, r)
 				}
 			}
 
