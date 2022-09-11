@@ -75,7 +75,7 @@ func TestDownload(t *testing.T) {
 		go cl.Download(fmt.Sprintf("/%s", data[i]), "")
 	}
 
-	assert.FileExists(fmt.Sprintf("out/%s.swf", "hh_people_pool"))
+	assert.FileExists(fmt.Sprintf("./out/%s.swf", "hh_people_pool"))
 
 	wg.Wait()
 }
