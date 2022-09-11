@@ -47,6 +47,19 @@ type FurniType struct {
 	ClassName string   `xml:"classname,attr"`
 }
 
+type EffectMap struct {
+	XMLName xml.Name     `xml:"map"`
+	Effect  []EffectAttr `xml:"effect"`
+}
+
+type EffectAttr struct {
+	XMLName  xml.Name `xml:"effect"`
+	Id       string   `xml:"id,attr"`
+	Lib      string   `xml:"lib,attr"`
+	Type     string   `xml:"type,attr"`
+	Revision string   `xml:"revision,attr"`
+}
+
 func Parse(obj interface{}, xmlReader io.Reader) {
 
 	byteValue, err := ioutil.ReadAll(xmlReader)

@@ -82,3 +82,20 @@ func TestFurnidataWallItemType(t *testing.T) {
 	assert.Equal("wall_ph", furniData.WallItemType.FurniType[0].ClassName)
 	assert.Equal("4749", furniData.WallItemType.FurniType[1].Id)
 }
+
+func TestEffectMap(t *testing.T) {
+	assert := assert.New(t)
+	data := `
+	<map>
+		<effect id="211" lib="CyberKongz" type="fx" revision="67951"/>
+		<effect id="212" lib="Metakey" type="fx" revision="67970"/>
+	</map>
+	`
+
+	var effectMap EffectMap
+
+	Parse(&effectMap, strings.NewReader(data))
+
+	assert.Equal("CyberKongz", effectMap.Effect[0].Lib)
+	assert.Equal("212", effectMap.Effect[1].Id)
+}
