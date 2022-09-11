@@ -45,6 +45,7 @@ type FurniType struct {
 	XMLName   xml.Name `xml:"furnitype"`
 	Id        string   `xml:"id,attr"`
 	ClassName string   `xml:"classname,attr"`
+	Revision  string   `xml:"revision"`
 }
 
 type EffectMap struct {
