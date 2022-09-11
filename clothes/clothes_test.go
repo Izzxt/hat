@@ -67,7 +67,7 @@ func TestDownload(t *testing.T) {
 	assert := assert.New(t)
 	c := client.NewClient()
 	d := downloader.NewDownloader(c)
-	d.SetOutput("../out")
+	d.SetOutput("")
 	cl := NewClothes(*d, &wg, &mu)
 
 	for i := 0; i < 2; i++ {
@@ -75,7 +75,7 @@ func TestDownload(t *testing.T) {
 		go cl.Download(fmt.Sprintf("/%s", data[i]), "")
 	}
 
-	assert.FileExists(fmt.Sprintf("../out/%s.swf", "hh_people_pool"))
+	assert.FileExists(fmt.Sprintf("%s.swf", "hh_people_pool"))
 
 	wg.Wait()
 }
