@@ -72,7 +72,7 @@ jobs:
           git remote add resource git@github.com:izzxt/habbo-resource.git
           git add ./resource
           git commit -m "Commit from github actions"
-          git pull resource master
+          git pull --ff-only resource master
           git push resource master
 
     # - uses: EndBug/add-and-commit@v7
