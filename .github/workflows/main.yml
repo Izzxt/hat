@@ -59,14 +59,11 @@ jobs:
     - name: Download Clothes
       run: hat clothes
 
-    - name: Download Furnitures Icons
-      run: hat furni icons
+    # - name: Download Furnitures Icons
+    #   run: hat furni icons
 
-    - name: Download Furnitures
-      run: hat furni
-
-    - name: List
-      run: ls resource
+    # - name: Download Furnitures
+    #   run: hat furni
 
     - name: Push to Habbo Resource
       working-directory: resource
