@@ -41,13 +41,17 @@ func (f *Furnitures) GetIcons() []Furni {
 
 	xml.Parse(&furni, strings.NewReader(string(byte)))
 
-	for _, v := range furni.RoomItemType.FurniType {
-		r := regexp.MustCompile(`\*`)
-		i := fmt.Sprintf("%s_icon.png", r.ReplaceAllString(v.ClassName, "_"))
-		icons = append(icons, Furni{
-			Name:     i,
-			Revision: v.Revision,
-		})
+	keys := make(map[string]bool)
+	for _, entry := range furni.RoomItemType.FurniType {
+		if _, value := keys[entry.ClassName]; !value {
+			keys[entry.ClassName] = true
+			r := regexp.MustCompile(`\*`)
+			i := fmt.Sprintf("%s_icon.png", r.ReplaceAllString(entry.ClassName, "_"))
+			icons = append(icons, Furni{
+				Name:     i,
+				Revision: entry.Revision,
+			})
+		}
 	}
 
 	return icons
@@ -65,13 +69,17 @@ func (f *Furnitures) GetFurnis() []Furni {
 
 	xml.Parse(&furni, strings.NewReader(string(byte)))
 
-	for _, v := range furni.RoomItemType.FurniType {
-		r := regexp.MustCompile(`\*`)
-		i := fmt.Sprintf("%s.swf", r.Split(v.ClassName, -1)[0])
-		furnis = append(furnis, Furni{
-			Name:     i,
-			Revision: v.Revision,
-		})
+	for _, entry := range furni.RoomItemType.FurniType {
+		keys := make(map[string]bool)
+		if _, value := keys[entry.ClassName]; !value {
+			keys[entry.ClassName] = true
+			r := regexp.MustCompile(`\*`)
+			i := fmt.Sprintf("%s.swf", r.Split(entry.ClassName, -1)[0])
+			furnis = append(furnis, Furni{
+				Name:     i,
+				Revision: entry.Revision,
+			})
+		}
 	}
 
 	return furnis

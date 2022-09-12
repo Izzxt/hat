@@ -27,6 +27,7 @@ var effectsCmd = &cobra.Command{
 		var mu sync.Mutex
 		var effect xml.EffectMap
 
+		keys := make(map[string]bool)
 		c := client.NewClient()
 		d := downloader.NewDownloader(c)
 		d.SetOutput(Output)
@@ -53,13 +54,16 @@ var effectsCmd = &cobra.Command{
 			eBtye := e.GetAllEffectLib()
 			d.SetPath("")
 			xml.Parse(&effect, strings.NewReader(string(eBtye)))
-			for _, v := range effect.Effect {
-				wg.Add(1)
-				go func(v xml.EffectAttr) {
-					defer wg.Done()
-					d.SetFileName(fmt.Sprintf("%s.swf", v.Lib))
-					d.Download()
-				}(v)
+			for _, entry := range effect.Effect {
+				if _, value := keys[entry.Lib]; !value {
+					keys[entry.Lib] = true
+					wg.Add(1)
+					go func(v xml.EffectAttr) {
+						defer wg.Done()
+						d.SetFileName(fmt.Sprintf("%s.swf", v.Lib))
+						d.Download()
+					}(entry)
+				}
 				time.Sleep(100 * time.Millisecond)
 			}
 			wg.Wait()

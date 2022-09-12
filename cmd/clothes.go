@@ -28,6 +28,7 @@ var clothesCmd = &cobra.Command{
 		var wg sync.WaitGroup
 		var mu sync.Mutex
 
+		keys := make(map[string]bool)
 		c := client.NewClient()
 		d := downloader.NewDownloader(c)
 		d.SetOutput(Output)
@@ -55,11 +56,14 @@ var clothesCmd = &cobra.Command{
 
 			cl := clothes.NewClothes(*d, &wg, &mu)
 
-			for _, v := range figure.Lib {
-				wg.Add(1)
-				go func(v xml.FigureLib) {
-					cl.Download(fmt.Sprintf("%s", v.Id), Prod)
-				}(v)
+			for _, entry := range figure.Lib {
+				if _, value := keys[entry.Id]; !value {
+					keys[entry.Id] = true
+					wg.Add(1)
+					go func(v xml.FigureLib) {
+						cl.Download(fmt.Sprintf("%s", v.Id), Prod)
+					}(entry)
+				}
 				time.Sleep(100 * time.Millisecond)
 			}
 		}
