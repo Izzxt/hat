@@ -24,7 +24,7 @@ func TestFetchFigure(t *testing.T) {
 	d.SetGordon()
 	p := d.GetCurrentProduction()
 	d.SetProduction(p)
-	// d.SetPath("/")
+	d.SetPath("/")
 
 	d.SetFileName("figuremapv2.xml")
 
