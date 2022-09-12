@@ -65,12 +65,16 @@ jobs:
     # - name: Download Furnitures
     #   run: hat furni
 
+    - name: List
+      run: ls resource
+
     - name: Push to Habbo Resource
+      working-directory: resource
       run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
           git remote add resource git@github.com:izzxt/habbo-resource.git
-          git add resource/
+          git add resource/*
           git commit -m "Commit from github actions"
           git pull resource master --rebase
           git push resource master
