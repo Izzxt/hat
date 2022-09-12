@@ -22,5 +22,5 @@ jobs:
           path: resource
 
       - name: List directory 
-        run: ls
+        run: ls resource
 
