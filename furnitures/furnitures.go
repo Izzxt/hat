@@ -71,10 +71,10 @@ func (f *Furnitures) GetFurnis() []Furni {
 
 	for _, entry := range furni.RoomItemType.FurniType {
 		keys := make(map[string]bool)
-		if _, value := keys[entry.ClassName]; !value {
-			keys[entry.ClassName] = true
-			r := regexp.MustCompile(`\*`)
-			i := fmt.Sprintf("%s.swf", r.Split(entry.ClassName, -1)[0])
+		r := regexp.MustCompile(`\*`)
+		i := fmt.Sprintf("%s.swf", r.Split(entry.ClassName, -1)[0])
+		if _, value := keys[i]; !value {
+			keys[i] = true
 			furnis = append(furnis, Furni{
 				Name:     i,
 				Revision: entry.Revision,

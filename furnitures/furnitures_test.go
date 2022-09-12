@@ -1,6 +1,7 @@
 package furnitures
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/Izzxt/hat/client"
@@ -17,6 +18,7 @@ func TestGetFurniIcons(t *testing.T) {
 	f := NewFurnitures(*d, nil, nil)
 	i := f.GetIcons()
 
+	fmt.Print(len(i))
 	assert.Equal("shelves_norja_icon.png", i[0].Name)
 	assert.Equal("61856", i[0].Revision)
 }
