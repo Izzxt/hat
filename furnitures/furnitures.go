@@ -43,10 +43,10 @@ func (f *Furnitures) GetIcons() []Furni {
 
 	keys := make(map[string]bool)
 	for _, entry := range furni.RoomItemType.FurniType {
-		if _, value := keys[entry.ClassName]; !value {
-			keys[entry.ClassName] = true
-			r := regexp.MustCompile(`\*`)
-			i := fmt.Sprintf("%s_icon.png", r.ReplaceAllString(entry.ClassName, "_"))
+		r := regexp.MustCompile(`\*`)
+		i := fmt.Sprintf("%s_icon.png", r.ReplaceAllString(entry.ClassName, "_"))
+		if _, value := keys[i]; !value {
+			keys[i] = true
 			icons = append(icons, Furni{
 				Name:     i,
 				Revision: entry.Revision,
