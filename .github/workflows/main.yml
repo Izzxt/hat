@@ -28,8 +28,6 @@ jobs:
         
     - name: Test
       run: go test -v ./...
-      with:
-        cache: true
 
     - name: Install Go
       run: make install && hat
