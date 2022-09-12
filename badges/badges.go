@@ -39,6 +39,7 @@ func (b *Badges) GetAllCode() []string {
 		fmt.Println(dw.GetUrl())
 		byte, _ := dw.Fetch()
 		match := matchRegex(string(byte))
+		fmt.Println(string(byte))
 		for _, entry := range match {
 			if _, value := keys[entry[2]]; !value {
 				keys[entry[2]] = true
@@ -52,7 +53,7 @@ func (b *Badges) GetAllCode() []string {
 
 func matchRegex(findString string) [][]string {
 
-	m := regexp.MustCompile(`(?m)badge_(desc|name)_*(.[\w+\-$#!@#$%^&*()\s.|]*)=`)
+	m := regexp.MustCompile(`(?m)^badge_(desc|name)_*(.[\w+\-\$#!@#%^&*()\s\.|]*)=`)
 
 	return m.FindAllStringSubmatch(findString, -1)
 }
