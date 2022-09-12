@@ -24,37 +24,37 @@ jobs:
       run: make install && hat
 
     - name: Download Habbo.swf
-      run: hat habboswf -o ./resource
+      run: hat habboswf
 
     - name: Download Articles
-      run: hat articles -o ./resource
+      run: hat articles
 
     - name: Download Clothes
-      run: hat clothes -o ./resource
+      run: hat clothes
 
     - name: Download Furnitures Icons
-      run: hat furni icons -o ./resource
+      run: hat furni icons
 
     - name: Download Furnitures
-      run: hat furni -o ./resource
+      run: hat furni
 
     - name: Download Badges
-      run: hat badges -o ./resource
+      run: hat badges
 
     - name: Download Effects
-      run: hat effects -o ./resource
+      run: hat effects
 
     - name: Download Badgeparts
-      run: hat badgeparts -o ./resource
+      run: hat badgeparts
 
     - name: Download MP3
-      run: hat mp3 -o ./resource
+      run: hat mp3
 
     - name: Download Icons
-      run: hat icons -o ./resource
+      run: hat icons
 
     - name: Download Pets
-      run: hat mp3 -o ./resource
+      run: hat mp3
 
     - uses: EndBug/add-and-commit@v7
       with:
