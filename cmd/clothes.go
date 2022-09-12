@@ -55,6 +55,12 @@ var clothesCmd = &cobra.Command{
 
 			xml.Parse(&figure, strings.NewReader(string(byte)))
 
+			if d.GetOutput() != "" {
+				d.SetOutput(d.GetOutput())
+			} else {
+				d.SetOutput(fmt.Sprintf("resource/gordon/%s", d.GetProduction()))
+			}
+
 			cl := clothes.NewClothes(*d, &wg, &mu)
 
 			for _, entry := range figure.Lib {
