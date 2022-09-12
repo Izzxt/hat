@@ -100,7 +100,7 @@ func (g *Downloader) Download() int {
 	var fileName string
 
 	if g.isGordon {
-		linkUrl = fmt.Sprintf("https://images.habbo.%s/gordon/%s%s%s", g.domain, g.production, g.pathUrl, g.fileName)
+		linkUrl = fmt.Sprintf("https://images.habbo.%s/gordon/%s%s/%s", g.domain, g.production, g.pathUrl, g.fileName)
 	} else if g.isFurni {
 		linkUrl = fmt.Sprintf("https://images.habbo.%s/dcr/hof_furni/%s/%s", g.domain, g.revision, g.fileName)
 	} else if g.isImages {
@@ -144,12 +144,13 @@ func (g *Downloader) Download() int {
 		}
 	}
 
-	exts, err := fs.Exists(fmt.Sprintf("%s%s", g.GetOutput(), fileName))
+	exts, err := fs.Exists(fmt.Sprintf("%s/%s", g.GetOutput(), fileName))
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	file, err := os.Create(g.output + fileName)
+	// fmt.Println(fmt.Sprintf("%s/%s", g.output, fileName))
+	file, err := os.Create(fmt.Sprintf("%s/%s", g.output, fileName))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -171,7 +172,6 @@ func (g *Downloader) Download() int {
 	}
 
 	return resp.StatusCode
-	// fmt.Printf("Downloaded a file %s with size %d", fileName, size)
 }
 
 func (g *Downloader) GetCurrentProduction() string {
