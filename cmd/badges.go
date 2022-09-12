@@ -11,6 +11,7 @@ import (
 	"github.com/Izzxt/hat/badges"
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
+	"github.com/Izzxt/hat/fs"
 	"github.com/spf13/cobra"
 )
 
@@ -47,12 +48,15 @@ var badgesCmd = &cobra.Command{
 			d.SetPath("/c_images/album1584")
 			for _, v := range code {
 				wg.Add(1)
-				go func(v string) {
-					defer wg.Done()
-					d.SetFileName(fmt.Sprintf("%s.gif", v))
-					d.Download()
-				}(v)
-				time.Sleep(100 * time.Millisecond)
+				exts := fs.IsFileExists(d.GetOutput(), fmt.Sprintf("%s.gif", v))
+				if !exts {
+					go func(v string) {
+						defer wg.Done()
+						d.SetFileName(fmt.Sprintf("%s.gif", v))
+						d.Download()
+					}(v)
+					time.Sleep(100 * time.Millisecond)
+				}
 			}
 		}
 	},

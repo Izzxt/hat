@@ -12,6 +12,7 @@ import (
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
 	"github.com/Izzxt/hat/effects"
+	"github.com/Izzxt/hat/fs"
 	"github.com/Izzxt/hat/xml"
 	"github.com/spf13/cobra"
 )
@@ -56,15 +57,18 @@ var effectsCmd = &cobra.Command{
 			xml.Parse(&effect, strings.NewReader(string(eBtye)))
 			for _, entry := range effect.Effect {
 				if _, value := keys[entry.Lib]; !value {
-					keys[entry.Lib] = true
 					wg.Add(1)
-					go func(v xml.EffectAttr) {
-						defer wg.Done()
-						d.SetFileName(fmt.Sprintf("%s.swf", v.Lib))
-						d.Download()
-					}(entry)
+					keys[entry.Lib] = true
+					exts := fs.IsFileExists(d.GetOutput(), fmt.Sprintf("%s.swf", entry.Lib))
+					if !exts {
+						go func(v xml.EffectAttr) {
+							defer wg.Done()
+							d.SetFileName(fmt.Sprintf("%s.swf", v.Lib))
+							d.Download()
+						}(entry)
+						time.Sleep(100 * time.Millisecond)
+					}
 				}
-				time.Sleep(100 * time.Millisecond)
 			}
 			wg.Wait()
 		}

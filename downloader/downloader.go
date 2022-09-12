@@ -11,7 +11,6 @@ import (
 	"strings"
 
 	"github.com/Izzxt/hat/client"
-	"github.com/Izzxt/hat/fs"
 )
 
 type Downloader struct {
@@ -144,12 +143,6 @@ func (g *Downloader) Download() int {
 		}
 	}
 
-	exts, err := fs.Exists(fmt.Sprintf("%s/%s", g.GetOutput(), fileName))
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	// fmt.Println(fmt.Sprintf("%s/%s", g.output, fileName))
 	file, err := os.Create(fmt.Sprintf("%s/%s", g.output, fileName))
 	if err != nil {
 		log.Fatal(err)
@@ -159,17 +152,11 @@ func (g *Downloader) Download() int {
 
 	defer resp.Body.Close()
 
-	if exts {
-		r := regexp.MustCompile(`\/`)
-		fmt.Println(fmt.Sprintf("Skipped %s", r.ReplaceAllString(fileName, "")))
-	} else {
-		if _, err := io.Copy(file, resp.Body); err != nil {
-			log.Fatal(err)
-		}
-		fmt.Println(fmt.Sprintf("Download %s", fileName))
-
-		defer file.Close()
+	if _, err := io.Copy(file, resp.Body); err != nil {
+		log.Fatal(err)
 	}
+
+	defer file.Close()
 
 	return resp.StatusCode
 }

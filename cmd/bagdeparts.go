@@ -10,6 +10,7 @@ import (
 
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
+	"github.com/Izzxt/hat/fs"
 	"github.com/spf13/cobra"
 )
 
@@ -92,12 +93,15 @@ var badgepartsCmd = &cobra.Command{
 
 			for _, v := range badges {
 				wg.Add(1)
-				go func(v string) {
-					defer wg.Done()
-					d.SetFileName(v)
-					d.Download()
-				}(v)
-				time.Sleep(100 * time.Millisecond)
+				exts := fs.IsFileExists(d.GetOutput(), v)
+				if !exts {
+					go func(v string) {
+						defer wg.Done()
+						d.SetFileName(v)
+						d.Download()
+					}(v)
+					time.Sleep(100 * time.Millisecond)
+				}
 			}
 			wg.Wait()
 		}

@@ -10,6 +10,7 @@ import (
 
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
+	"github.com/Izzxt/hat/fs"
 	"github.com/spf13/cobra"
 )
 
@@ -58,9 +59,11 @@ var petsCmd = &cobra.Command{
 				wg.Add(1)
 				go func(v string) {
 					defer wg.Done()
-					d.SetFileName(v)
-					d.Download()
-					fmt.Println(fmt.Sprintf("Download %s", v))
+					exts := fs.IsFileExists(d.GetOutput(), v)
+					if !exts {
+						d.SetFileName(v)
+						d.Download()
+					}
 				}(v)
 				time.Sleep(100 * time.Millisecond)
 			}

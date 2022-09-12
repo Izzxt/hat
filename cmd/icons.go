@@ -9,6 +9,7 @@ import (
 
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
+	"github.com/Izzxt/hat/fs"
 	"github.com/spf13/cobra"
 )
 
@@ -42,15 +43,18 @@ var iconsCmd = &cobra.Command{
 
 			for run {
 				d.SetFileName(fmt.Sprintf("icon_%d.png", i))
-				code := d.Download()
-				if code == 404 {
-					attempt++
-				}
+				exts := fs.IsFileExists(d.GetOutput(), fmt.Sprintf("icon_%d.png", i))
+				if !exts {
+					code := d.Download()
+					if code == 404 {
+						attempt++
+					}
 
-				if attempt > 5 {
-					run = false
+					if attempt > 5 {
+						run = false
+					}
+					time.Sleep(100 * time.Millisecond)
 				}
-				time.Sleep(100 * time.Millisecond)
 				i++
 			}
 		}

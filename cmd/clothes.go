@@ -12,6 +12,7 @@ import (
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/clothes"
 	"github.com/Izzxt/hat/downloader"
+	"github.com/Izzxt/hat/fs"
 	"github.com/Izzxt/hat/xml"
 	"github.com/spf13/cobra"
 )
@@ -59,12 +60,15 @@ var clothesCmd = &cobra.Command{
 			for _, entry := range figure.Lib {
 				if _, value := keys[entry.Id]; !value {
 					keys[entry.Id] = true
-					wg.Add(1)
-					go func(v xml.FigureLib) {
-						cl.Download(fmt.Sprintf("%s", v.Id), Prod)
-					}(entry)
+					exts := fs.IsFileExists(d.GetOutput(), fmt.Sprintf("/%s.swf", entry.Id))
+					if !exts {
+						wg.Add(1)
+						go func(v xml.FigureLib) {
+							cl.Download(fmt.Sprintf("%s", v.Id), Prod)
+						}(entry)
+						time.Sleep(100 * time.Millisecond)
+					}
 				}
-				time.Sleep(100 * time.Millisecond)
 			}
 		}
 

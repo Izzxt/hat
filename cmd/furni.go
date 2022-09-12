@@ -10,6 +10,7 @@ import (
 
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
+	"github.com/Izzxt/hat/fs"
 	"github.com/Izzxt/hat/furnitures"
 	"github.com/spf13/cobra"
 )
@@ -52,13 +53,16 @@ var furniCmd = &cobra.Command{
 
 				for _, v := range i {
 					wg.Add(1)
-					go func(v furnitures.Furni) {
-						defer wg.Done()
-						d.SetPath(fmt.Sprintf("/dcr/hof_furni/%s", v.Revision))
-						d.SetFileName(v.Name)
-						d.Download()
-					}(v)
-					time.Sleep(150 * time.Millisecond)
+					exts := fs.IsFileExists(d.GetOutput(), v.Name)
+					if !exts {
+						go func(v furnitures.Furni) {
+							defer wg.Done()
+							d.SetPath(fmt.Sprintf("/dcr/hof_furni/%s", v.Revision))
+							d.SetFileName(v.Name)
+							d.Download()
+						}(v)
+						time.Sleep(150 * time.Millisecond)
+					}
 				}
 				wg.Wait()
 			}
@@ -88,14 +92,17 @@ var furniCmd = &cobra.Command{
 						d.SetOther()
 
 						for _, v := range i {
-							wg.Add(1)
-							go func(v furnitures.Furni) {
-								defer wg.Done()
-								d.SetPath(fmt.Sprintf("/dcr/hof_furni/%s", v.Revision))
-								d.SetFileName(v.Name)
-								d.Download()
-							}(v)
-							time.Sleep(150 * time.Millisecond)
+							exts := fs.IsFileExists(d.GetOutput(), v.Name)
+							if !exts {
+								wg.Add(1)
+								go func(v furnitures.Furni) {
+									defer wg.Done()
+									d.SetPath(fmt.Sprintf("/dcr/hof_furni/%s", v.Revision))
+									d.SetFileName(v.Name)
+									d.Download()
+								}(v)
+								time.Sleep(150 * time.Millisecond)
+							}
 						}
 						wg.Wait()
 					}
