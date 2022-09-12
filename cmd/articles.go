@@ -30,6 +30,7 @@ var articlesCmd = &cobra.Command{
 		var wg sync.WaitGroup
 		var mu sync.Mutex
 
+		keys := make(map[string]bool)
 		ch := make(chan articles.Result)
 		c := client.NewClient()
 		d := downloader.NewDownloader(c)
@@ -68,9 +69,12 @@ var articlesCmd = &cobra.Command{
 
 			for _, a := range data {
 				s := rg.FindAllString(a, -1)
-				for _, tr := range s {
-					r := rgmt.ReplaceAllString(tr, ".png")
-					after = append(after, r)
+				for _, entry := range s {
+					if _, value := keys[entry]; !value {
+						keys[entry] = true
+						r := rgmt.ReplaceAllString(entry, ".png")
+						after = append(after, r)
+					}
 				}
 			}
 
