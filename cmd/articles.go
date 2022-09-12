@@ -82,9 +82,9 @@ var articlesCmd = &cobra.Command{
 			defer wg.Wait()
 
 			for _, v := range after {
-				wg.Add(1)
 				exts := fs.IsFileExists(d.GetOutput(), v)
 				if !exts {
+					wg.Add(1)
 					go func(v string) {
 						defer wg.Done()
 						d.SetFileName(v)

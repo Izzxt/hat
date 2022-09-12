@@ -56,10 +56,10 @@ var petsCmd = &cobra.Command{
 			}
 
 			for _, v := range pets {
-				wg.Add(1)
 				exts := fs.IsFileExists(d.GetOutput(), v)
 				if !exts {
 					go func(v string) {
+						wg.Add(1)
 						defer wg.Done()
 						d.SetFileName(v)
 						d.Download()

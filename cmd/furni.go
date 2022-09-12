@@ -52,10 +52,10 @@ var furniCmd = &cobra.Command{
 				d.SetOther()
 
 				for _, v := range i {
-					wg.Add(1)
 					exts := fs.IsFileExists(d.GetOutput(), v.Name)
 					if !exts {
 						go func(v furnitures.Furni) {
+							wg.Add(1)
 							defer wg.Done()
 							d.SetPath(fmt.Sprintf("/dcr/hof_furni/%s", v.Revision))
 							d.SetFileName(v.Name)

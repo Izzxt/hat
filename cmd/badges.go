@@ -47,10 +47,10 @@ var badgesCmd = &cobra.Command{
 			d.SetOther()
 			d.SetPath("/c_images/album1584")
 			for _, v := range code {
-				wg.Add(1)
 				exts := fs.IsFileExists(d.GetOutput(), fmt.Sprintf("%s.gif", v))
 				if !exts {
 					go func(v string) {
+						wg.Add(1)
 						defer wg.Done()
 						d.SetFileName(fmt.Sprintf("%s.gif", v))
 						d.Download()
