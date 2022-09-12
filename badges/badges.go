@@ -1,7 +1,6 @@
 package badges
 
 import (
-	"fmt"
 	"regexp"
 	"sync"
 
@@ -36,10 +35,8 @@ func (b *Badges) GetAllCode() []string {
 	for _, d := range domain {
 		dw.SetDomain(d)
 		dw.SetPath("/external_flash_texts/0")
-		fmt.Println(dw.GetUrl())
 		byte, _ := dw.Fetch()
 		match := matchRegex(string(byte))
-		fmt.Println(string(byte))
 		for _, entry := range match {
 			if _, value := keys[entry[2]]; !value {
 				keys[entry[2]] = true
