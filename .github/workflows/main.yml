@@ -10,12 +10,15 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
-    - name: Checkout Habbo Resource
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
       with:
         repository: izzxt/habbo-resource
         token: ${{ secrets.GH_PAT }}
         path: resource
+
+    - uses: webfactory/ssh-agent@v0.5.4
+      with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
     - name: Set up Go
       uses: actions/setup-go@v3
@@ -66,7 +69,7 @@ jobs:
       run: |
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git remote add resource https://github.com/izzxt/habbo-resource.git
+          git remote add resource git@github.com:izzxt/habbo-resource.git
           git add ./resource
           git commit -m "Commit from github actions"
           git push resource master
