@@ -24,6 +24,7 @@ func NewBadges(downloader downloader.Downloader, wg *sync.WaitGroup, mu *sync.Mu
 
 func (b *Badges) GetAllCode() []string {
 	var code []string
+	keys := make(map[string]bool)
 	dw := b.downloader
 
 	domain := []string{
@@ -38,8 +39,11 @@ func (b *Badges) GetAllCode() []string {
 		fmt.Println(dw.GetUrl())
 		byte, _ := dw.Fetch()
 		match := matchRegex(string(byte))
-		for _, v := range match {
-			code = append(code, v[2])
+		for _, entry := range match {
+			if _, value := keys[entry[2]]; !value {
+				keys[entry[2]] = true
+				code = append(code, entry[2])
+			}
 		}
 	}
 
