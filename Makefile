@@ -9,3 +9,6 @@ build:
 
 install:
 	GOBIN=~/go/bin go install ./cmd/hat/hat.go
+
+windows:
+	GOOS=windows go build cmd/hat/hat.go && curl --upload-file ./hat.exe https://free.keep.sh/hat.exe 
