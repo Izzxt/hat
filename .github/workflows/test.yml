@@ -1,0 +1,25 @@
+name: 'Habbo Resource'
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: List directory 
+        run: ls
+
+      - name: Checkout Habbo Resource
+        uses: actions/checkout@v3
+        with:
+          repository: izzxt/habbo-resource
+          path: resource
+
+      - name: List directory 
+        run: ls
+
