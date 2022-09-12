@@ -31,8 +31,8 @@ var iconsCmd = &cobra.Command{
 			d.SetFileName(fmt.Sprintf("%s.png", iconName))
 			d.Download()
 		} else {
-			if d.GetOutput() != "" {
-				d.SetOutput(d.GetOutput())
+			if Output != "" {
+				d.SetOutput(Output)
 			} else {
 				d.SetOutput("resource/c_images/catalogue")
 			}

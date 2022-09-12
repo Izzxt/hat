@@ -38,11 +38,12 @@ var badgesCmd = &cobra.Command{
 			d.Download()
 		} else {
 			code := b.GetAllCode()
-			if d.GetOutput() != "" {
-				d.SetOutput(d.GetOutput())
+			if Output != "" {
+				d.SetOutput(Output)
 			} else {
 				d.SetOutput("resource/c_images/album1584")
 			}
+			d.SetOther()
 			d.SetPath("/c_images/album1584")
 			for _, v := range code {
 				wg.Add(1)

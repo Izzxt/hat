@@ -88,7 +88,7 @@ var (
 
 			case "figuremap":
 				d.SetGordon()
-				d.SetPath("/figuremap.xml")
+				// d.SetPath("/figuremap.xml")
 				d.SetFileName("figuremap.xml")
 				current := d.GetCurrentProduction()
 				d.SetProduction(current)
@@ -101,7 +101,7 @@ var (
 
 			case "effectmap":
 				d.SetGordon()
-				d.SetPath("/effectmap.xml")
+				// d.SetPath("/effectmap.xml")
 				d.SetFileName("effectmap.xml")
 				current := d.GetCurrentProduction()
 				d.SetProduction(current)

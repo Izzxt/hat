@@ -12,7 +12,6 @@ import (
 	"github.com/Izzxt/hat/articles"
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
-	"github.com/schollz/progressbar/v3"
 	"github.com/spf13/cobra"
 )
 
@@ -44,8 +43,8 @@ var articlesCmd = &cobra.Command{
 			d.SetFileName(fmt.Sprintf("%s.png", name))
 			d.Download()
 		} else {
-			if d.GetOutput() != "" {
-				d.SetOutput(d.GetOutput())
+			if Output != "" {
+				d.SetOutput(Output)
 			} else {
 				d.SetOutput("resource/habbo-web-articles")
 			}
@@ -77,13 +76,10 @@ var articlesCmd = &cobra.Command{
 
 			defer wg.Wait()
 
-			bar := progressbar.Default(int64(len(after)))
 			for _, v := range after {
 				wg.Add(1)
 				go func(v string) {
 					defer wg.Done()
-					bar.Add(1)
-					bar.Describe(v)
 					d.SetFileName(v)
 					d.Download()
 				}(v)

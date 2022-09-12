@@ -25,13 +25,14 @@ var effectsCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		var wg sync.WaitGroup
 		var mu sync.Mutex
+		var effect xml.EffectMap
 
 		c := client.NewClient()
 		d := downloader.NewDownloader(c)
 		d.SetOutput(Output)
 		d.SetDomain(Domain)
 
-		if Prod != "" {
+		if Prod == "" {
 			Prod = d.GetCurrentProduction()
 		}
 
@@ -42,14 +43,15 @@ var effectsCmd = &cobra.Command{
 			d.SetFileName(fmt.Sprintf("%s.swf", effectName))
 			d.Download()
 		} else {
-			if d.GetOutput() != "" {
-				d.SetOutput(d.GetOutput())
+			d.SetGordon()
+			if Output != "" {
+				d.SetOutput(Output)
 			} else {
 				d.SetOutput(fmt.Sprintf("resource/gordon/%s", d.GetProduction()))
 			}
-			var effect xml.EffectMap
 
 			eBtye := e.GetAllEffectLib()
+			d.SetPath("")
 			xml.Parse(&effect, strings.NewReader(string(eBtye)))
 			for _, v := range effect.Effect {
 				wg.Add(1)

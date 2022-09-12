@@ -26,7 +26,7 @@ var (
 			d.SetGordon()
 			p := d.GetCurrentProduction()
 			d.SetProduction(p)
-			d.SetPath("/")
+			// d.SetPath("/")
 
 			switch gordonType {
 			case "HabboConfig":

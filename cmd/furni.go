@@ -41,8 +41,8 @@ var furniCmd = &cobra.Command{
 				d.Download()
 			} else {
 				d.SetDomain("com")
-				if d.GetOutput() != "" {
-					d.SetOutput(d.GetOutput())
+				if Output != "" {
+					d.SetOutput(Output)
 				} else {
 					d.SetOutput("resource/dcr/hof_furni")
 				}
@@ -57,7 +57,6 @@ var furniCmd = &cobra.Command{
 						d.SetPath(fmt.Sprintf("/dcr/hof_furni/%s", v.Revision))
 						d.SetFileName(v.Name)
 						d.Download()
-						fmt.Println(fmt.Sprintf("Download %s/%s", v.Revision, v.Name))
 					}(v)
 					time.Sleep(150 * time.Millisecond)
 				}
@@ -79,6 +78,11 @@ var furniCmd = &cobra.Command{
 						d.Download()
 					} else {
 						d.SetDomain("com")
+						if Output != "" {
+							d.SetOutput(Output)
+						} else {
+							d.SetOutput("resource/dcr/hof_furni/icons")
+						}
 						f := furnitures.NewFurnitures(*d, &wg, &mu)
 						i := f.GetIcons()
 						d.SetOther()
@@ -90,7 +94,6 @@ var furniCmd = &cobra.Command{
 								d.SetPath(fmt.Sprintf("/dcr/hof_furni/%s", v.Revision))
 								d.SetFileName(v.Name)
 								d.Download()
-								fmt.Println(fmt.Sprintf("Download %s/%s", v.Revision, v.Name))
 							}(v)
 							time.Sleep(150 * time.Millisecond)
 						}

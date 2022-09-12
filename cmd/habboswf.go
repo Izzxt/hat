@@ -22,16 +22,16 @@ var habboswfCmd = &cobra.Command{
 		d.SetDomain(Domain)
 		p := d.GetCurrentProduction()
 
-		if d.GetOutput() != "" {
-			d.SetOutput(d.GetOutput())
+		if Output != "" {
+			d.SetOutput(Output)
 		} else {
 			d.SetOutput(fmt.Sprintf("resource/gordon/%s", p))
 		}
 
 		d.SetGordon()
 		d.SetProduction(p)
-		d.SetPath("/")
-		d.SetFileName("/Habbo.swf")
+		// d.SetPath("/")
+		d.SetFileName("Habbo.swf")
 		d.Download()
 	},
 }

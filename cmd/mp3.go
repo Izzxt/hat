@@ -31,8 +31,8 @@ var mp3Cmd = &cobra.Command{
 			d.SetFileName(fmt.Sprintf("%s.mp3", mp3Name))
 			d.Download()
 		} else {
-			if d.GetOutput() != "" {
-				d.SetOutput(d.GetOutput())
+			if Output != "" {
+				d.SetOutput(Output)
 			} else {
 				d.SetOutput("resource/dcr/hof_furni/mp3")
 			}

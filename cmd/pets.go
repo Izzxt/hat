@@ -28,18 +28,18 @@ var petsCmd = &cobra.Command{
 		d.SetOutput(Output)
 		d.SetGordon()
 
-		if Prod != "" {
+		if Prod == "" {
 			Prod = d.GetCurrentProduction()
 		}
 
 		d.SetProduction(Prod)
-		d.SetPath("/")
+		// d.SetPath("/")
 		if petName != "" {
 			d.SetFileName(fmt.Sprintf("%s.swf", petName))
 			d.Download()
 		} else {
-			if d.GetOutput() != "" {
-				d.SetOutput(d.GetOutput())
+			if Output != "" {
+				d.SetOutput(Output)
 			} else {
 				d.SetOutput(fmt.Sprintf("resource/gordon/%s", d.GetProduction()))
 			}

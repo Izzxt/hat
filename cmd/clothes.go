@@ -42,10 +42,10 @@ var clothesCmd = &cobra.Command{
 		d.SetProduction(Prod)
 
 		if clothesName != "" {
-			d.SetFileName(fmt.Sprintf("/%s.swf", clothesName))
+			d.SetFileName(fmt.Sprintf("%s.swf", clothesName))
 			d.Download()
 		} else {
-			d.SetFileName("/figuremapv2.xml")
+			d.SetFileName("figuremapv2.xml")
 
 			byte, _ := d.Fetch()
 
@@ -58,7 +58,7 @@ var clothesCmd = &cobra.Command{
 			for _, v := range figure.Lib {
 				wg.Add(1)
 				go func(v xml.FigureLib) {
-					cl.Download(fmt.Sprintf("/%s", v.Id), Prod)
+					cl.Download(fmt.Sprintf("%s", v.Id), Prod)
 				}(v)
 				time.Sleep(100 * time.Millisecond)
 			}
