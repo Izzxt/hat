@@ -61,7 +61,7 @@ var furniCmd = &cobra.Command{
 							d.SetFileName(v.Name)
 							d.Download()
 						}(v)
-						time.Sleep(150 * time.Millisecond)
+						time.Sleep(100 * time.Millisecond)
 					}
 				}
 				wg.Wait()
@@ -101,7 +101,7 @@ var furniCmd = &cobra.Command{
 									d.SetFileName(v.Name)
 									d.Download()
 								}(v)
-								time.Sleep(150 * time.Millisecond)
+								time.Sleep(100 * time.Millisecond)
 							}
 						}
 						wg.Wait()
