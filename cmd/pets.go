@@ -57,15 +57,15 @@ var petsCmd = &cobra.Command{
 
 			for _, v := range pets {
 				wg.Add(1)
-				go func(v string) {
-					defer wg.Done()
-					exts := fs.IsFileExists(d.GetOutput(), v)
-					if !exts {
+				exts := fs.IsFileExists(d.GetOutput(), v)
+				if !exts {
+					go func(v string) {
+						defer wg.Done()
 						d.SetFileName(v)
 						d.Download()
-					}
-				}(v)
-				time.Sleep(100 * time.Millisecond)
+					}(v)
+					time.Sleep(100 * time.Millisecond)
+				}
 			}
 			wg.Wait()
 		}
