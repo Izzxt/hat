@@ -38,32 +38,32 @@ jobs:
     # - name: Download Badges
     #   run: hat badges
 
-    # - name: Download Effects
-    #   run: hat effects
-    #
-    # - name: Download Badgeparts
-    #   run: hat badgeparts
-    #
-    # - name: Download MP3
-    #   run: hat mp3
-    #
-    # - name: Download Icons
-    #   run: hat icons
-    #
-    # - name: Download Pets
-    #   run: hat mp3
-    #
-    # - name: Download Articles
-    #   run: hat articles
-    #
-    # - name: Download Clothes
-    #   run: hat clothes
-    #
-    # - name: Download Furnitures Icons
-    #   run: hat furni icons
-    #
-    # - name: Download Furnitures
-    #   run: hat furni
+    - name: Download Effects
+      run: hat effects
+
+    - name: Download Badgeparts
+      run: hat badgeparts
+
+    - name: Download MP3
+      run: hat mp3
+
+    - name: Download Icons
+      run: hat icons
+
+    - name: Download Pets
+      run: hat mp3
+
+    - name: Download Articles
+      run: hat articles
+
+    - name: Download Clothes
+      run: hat clothes
+
+    - name: Download Furnitures Icons
+      run: hat furni icons
+
+    - name: Download Furnitures
+      run: hat furni
 
     - name: List
       run: ls resource
