@@ -74,9 +74,9 @@ jobs:
           git config user.email github-actions@github.com
           git remote add resource git@github.com:izzxt/habbo-resource.git
           git add .
-          git commit -m "Commit from github actions"
+          git commit --allow-empty -m "Commit from github actions"
           git pull resource master --rebase
-          git push resource master
+          git push -f resource master
 
     # - uses: EndBug/add-and-commit@v7
     #   with:
