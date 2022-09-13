@@ -5,6 +5,7 @@ package cmd
 
 import (
 	"fmt"
+	"net/http"
 	"time"
 
 	"github.com/Izzxt/hat/client"
@@ -43,17 +44,22 @@ var iconsCmd = &cobra.Command{
 
 			for run {
 				d.SetFileName(fmt.Sprintf("icon_%d.png", i))
-				exts := fs.IsFileExists(d.GetOutput(), fmt.Sprintf("icon_%d.png", i))
-				if !exts {
-					code := d.Download()
-					if code == 404 {
-						attempt++
-					}
+				byte, _ := d.Fetch()
+				mimeType := http.DetectContentType(byte)
 
-					if attempt > 5 {
-						run = false
+				if mimeType == "image/png" {
+					exts := fs.IsFileExists(d.GetOutput(), fmt.Sprintf("icon_%d.png", i))
+
+					if !exts {
+						d.Download()
+						time.Sleep(100 * time.Millisecond)
 					}
-					time.Sleep(100 * time.Millisecond)
+				} else {
+					attempt++
+				}
+
+				if attempt > 5 {
+					run = false
 				}
 				i++
 			}
