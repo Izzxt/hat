@@ -37,8 +37,8 @@ jobs:
     - name: Download Habbo.swf
       run: hat habboswf
 
-    # - name: Download Badges
-    #   run: hat badges
+    - name: Download Badges
+      run: hat badges
 
     - name: Download Effects
       run: hat effects
