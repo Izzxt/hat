@@ -50,7 +50,7 @@ func (b *Badges) GetAllCode() []string {
 
 func matchRegex(findString string) [][]string {
 
-	m := regexp.MustCompile(`(?m)^badge_(desc|name)_*(.[\w+\-$#!@#$%^&*()\s.|]*)=`)
+	m := regexp.MustCompile(`(?m)badge_(desc|name)_*([^=]+)=`)
 
 	return m.FindAllStringSubmatch(findString, -1)
 }
