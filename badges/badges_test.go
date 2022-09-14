@@ -62,11 +62,13 @@ badge_name_JKFES-FKES!0=Hello World
 badge_name_$#JKFES+FKES_0.=Hello World
 badge_name_@#JKFES(FKES__=Hello World
 badge_name_()JKFES FKES_=Hello World
+notifications.text.achievement.reward.2=Recompensa: %activitypoints% Coracoes
+notifications.text.achievement.unlocked=Você ganhou a conquista
+notifications.text.achievement=Você ganhou a conquista "%badge_name%"
+notifications.text.activitypoints.0=%change% Pixels recebidos, seu total agora é %count%.
 	`
 
 	m := matchRegex(match)
-
-	fmt.Print(m)
 
 	assert.Equal("JKFES FKES", m[0][2])
 	assert.Equal("JK|FES_FKES", m[1][2])
