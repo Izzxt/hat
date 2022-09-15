@@ -62,6 +62,7 @@ badge_name_JKFES-FKES!0=Hello World
 badge_name_$#JKFES+FKES_0.=Hello World
 badge_name_@#JKFES(FKES__=Hello World
 badge_name_()JKFES FKES_=Hello World
+badge_desc_KITG1=${badge_desc_KIT01}
 notifications.text.achievement.reward.2=Recompensa: %activitypoints% Coracoes
 notifications.text.achievement.unlocked=Você ganhou a conquista
 notifications.text.achievement=Você ganhou a conquista "%badge_name%"
@@ -80,4 +81,5 @@ notifications.text.activitypoints.0=%change% Pixels recebidos, seu total agora �
 	assert.Equal("$#JKFES+FKES_0.", m[7][2])
 	assert.Equal("@#JKFES(FKES__", m[8][2])
 	assert.Equal("()JKFES FKES_", m[9][2])
+	assert.Equal("KITG1", m[10][2])
 }
