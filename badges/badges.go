@@ -2,6 +2,7 @@ package badges
 
 import (
 	"regexp"
+	"strings"
 	"sync"
 
 	"github.com/Izzxt/hat/downloader"
@@ -40,7 +41,8 @@ func (b *Badges) GetAllCode() []string {
 		for _, entry := range match {
 			if _, value := keys[entry[2]]; !value {
 				keys[entry[2]] = true
-				code = append(code, entry[2])
+				c := strings.TrimSpace(entry[2])
+				code = append(code, c)
 			}
 		}
 	}
