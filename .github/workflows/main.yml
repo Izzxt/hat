@@ -58,6 +58,9 @@ jobs:
     - name: Download Icons
       run: hat icons
 
+    - name: Download Gordon
+      run: hat gordon
+
     - name: Download Pets
       run: hat mp3
 

@@ -5,9 +5,11 @@ package cmd
 
 import (
 	"fmt"
+	"time"
 
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
+	"github.com/Izzxt/hat/fs"
 	"github.com/spf13/cobra"
 )
 
@@ -22,11 +24,12 @@ var (
 			d := downloader.NewDownloader(c)
 			d.SetOutput(Output)
 			d.SetDomain(Domain)
-
 			d.SetGordon()
-			p := d.GetCurrentProduction()
-			d.SetProduction(p)
-			// d.SetPath("/")
+			d.SetProduction(Prod)
+
+			if Prod == "" {
+				Prod = d.GetCurrentProduction()
+			}
 
 			switch gordonType {
 			case "HabboConfig":
@@ -42,20 +45,36 @@ var (
 				d.SetFileName("PlaceHolderFurniture.swf")
 				d.Download()
 			case "PlaceHolderPet":
-				d.SetFileName("PlaceHolderPet.xml")
+				d.SetFileName("PlaceHolderPet.swf")
 				d.Download()
 			case "PlaceHolderWallItem":
-				d.SetFileName("PlaceHolderWallItem.xml")
+				d.SetFileName("PlaceHolderWallItem.swf")
 				d.Download()
 			case "SelectionArrow":
-				d.SetFileName("SelectionArrow.xml")
+				d.SetFileName("SelectionArrow.swf")
 				d.Download()
 			case "TileCursor":
-				d.SetFileName("TileCursor.xml")
+				d.SetFileName("TileCursor.swf")
 				d.Download()
 			default:
-				// TODO: Download all
-				fmt.Print("Gordon")
+
+				gordon := []string{
+					"config_habbo.xml", "HabboAvatarActions.xml", "HabboRoomContent.swf",
+					"PlaceHolderFurniture.swf", "PlaceHolderPet.swf", "PlaceHolderWallItem.swf",
+					"SelectionArrow.swf", "TileCursor.swf",
+				}
+
+				d.SetOutput(fmt.Sprintf("resource/gordon/%s", Prod))
+				for _, v := range gordon {
+					exts := fs.IsFileExists(d.GetOutput(), v)
+					if !exts {
+						go func(v string) {
+							d.SetFileName(v)
+							d.Download()
+						}(v)
+						time.Sleep(100 * time.Millisecond)
+					}
+				}
 			}
 		},
 	}
