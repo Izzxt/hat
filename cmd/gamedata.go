@@ -183,10 +183,8 @@ var (
 					if !exts {
 
 						if g.path != "figuremap" && g.path != "effectmap" {
-							fmt.Println("No 1")
 							d.SetOutput("resource/gamedata")
 							if g.path == "external_override_variables" || g.path == "external_override_flash_texts" {
-								fmt.Println("true")
 								d.SetOutput("resource/gamedata/override")
 							}
 							d.SetPath(fmt.Sprintf("/%s/0", g.path))
