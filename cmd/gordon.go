@@ -22,14 +22,20 @@ var (
 		Run: func(cmd *cobra.Command, args []string) {
 			c := client.NewClient()
 			d := downloader.NewDownloader(c)
-			d.SetOutput(Output)
 			d.SetDomain(Domain)
 			d.SetGordon()
-			d.SetProduction(Prod)
+
+			if Output != "" {
+				d.SetOutput(Output)
+			} else {
+				d.SetOutput(fmt.Sprintf("resource/gordon/%s", Prod))
+			}
 
 			if Prod == "" {
 				Prod = d.GetCurrentProduction()
 			}
+
+			d.SetProduction(Prod)
 
 			switch gordonType {
 			case "HabboConfig":
@@ -64,8 +70,8 @@ var (
 					"SelectionArrow.swf", "TileCursor.swf",
 				}
 
-				d.SetOutput(fmt.Sprintf("resource/gordon/%s", Prod))
 				for _, v := range gordon {
+					fmt.Println(v, d.GetUrl())
 					exts := fs.IsFileExists(d.GetOutput(), v)
 					if !exts {
 						go func(v string) {
