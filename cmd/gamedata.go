@@ -181,16 +181,19 @@ var (
 				for _, g := range gamedata {
 					exts := fs.IsFileExists(d.GetOutput(), g.file)
 					if !exts {
-						if g.path == "external_override_variables" || g.path == "external_override_flash_texts" {
-							d.SetOutput("resource/gamedata/override")
-						}
 
 						if g.path != "figuremap" && g.path != "effectmap" {
+							fmt.Println("No 1")
 							d.SetOutput("resource/gamedata")
+							if g.path == "external_override_variables" || g.path == "external_override_flash_texts" {
+								fmt.Println("true")
+								d.SetOutput("resource/gamedata/override")
+							}
 							d.SetPath(fmt.Sprintf("/%s/0", g.path))
 							d.SetFileName(g.file)
 							d.Download()
 						} else {
+							d.SetOutput("resource/gamedata")
 							d.SetPath("")
 							d.SetGordon()
 							d.SetFileName(g.file)
