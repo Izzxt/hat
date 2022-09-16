@@ -25,14 +25,14 @@ var (
 			d.SetDomain(Domain)
 			d.SetGordon()
 
+			if Prod == "" {
+				Prod = d.GetCurrentProduction()
+			}
+
 			if Output != "" {
 				d.SetOutput(Output)
 			} else {
 				d.SetOutput(fmt.Sprintf("resource/gordon/%s", Prod))
-			}
-
-			if Prod == "" {
-				Prod = d.GetCurrentProduction()
 			}
 
 			d.SetProduction(Prod)
