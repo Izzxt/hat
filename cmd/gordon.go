@@ -71,7 +71,6 @@ var (
 				}
 
 				for _, v := range gordon {
-					fmt.Println(v, d.GetUrl())
 					exts := fs.IsFileExists(d.GetOutput(), v)
 					if !exts {
 						go func(v string) {
