@@ -31,7 +31,7 @@ jobs:
     - name: Test
       run: go test -v ./...
 
-    - name: Install Go
+    - name: Install Hat
       run: make install && hat
 
     - name: Download Habbo.swf
@@ -39,6 +39,9 @@ jobs:
 
     - name: Download Badges
       run: hat badges
+
+    - name: Download Promo
+      run: hat promo
 
     - name: Download Effects
       run: hat effects
