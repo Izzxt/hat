@@ -191,7 +191,6 @@ var (
 							d.SetFileName(g.file)
 							d.Download()
 						} else {
-							d.SetOutput("resource/gamedata")
 							d.SetPath("")
 							d.SetGordon()
 							d.SetFileName(g.file)
