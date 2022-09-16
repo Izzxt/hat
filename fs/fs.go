@@ -5,6 +5,8 @@ import (
 	"log"
 	"os"
 	"regexp"
+
+	"github.com/fatih/color"
 )
 
 func Exists(path string) (bool, error) {
@@ -26,11 +28,11 @@ func IsFileExists(output string, fileName string) bool {
 
 	if exts {
 		r := regexp.MustCompile(`\/`)
-		fmt.Println(fmt.Sprintf("Skipped %s", r.ReplaceAllString(fileName, "")))
+		fmt.Println(fmt.Sprintf("%s %s", color.RedString("➜"), r.ReplaceAllString(fileName, "")))
 		return true
 	} else {
 		r := regexp.MustCompile(`\/`)
-		fmt.Println(fmt.Sprintf("Download %s", r.ReplaceAllString(fileName, "")))
+		fmt.Println(fmt.Sprintf("%s %s", color.GreenString("✓"), r.ReplaceAllString(fileName, "")))
 	}
 
 	return false

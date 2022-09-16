@@ -64,6 +64,9 @@ jobs:
     - name: Download Articles
       run: hat articles
 
+    - name: Download Gamedata
+      run: hat gamedata
+
     - name: Download Clothes
       run: hat clothes
 
