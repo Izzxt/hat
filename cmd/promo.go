@@ -45,12 +45,12 @@ var promoCmd = &cobra.Command{
 			d.SetOther()
 			d.SetPath("/c_images/reception")
 			for _, v := range images {
-				exts := fs.IsFileExists(d.GetOutput(), fmt.Sprintf("%s.png", v))
+				exts := fs.IsFileExists(d.GetOutput(), v)
 				if !exts {
 					go func(v string) {
 						wg.Add(1)
 						defer wg.Done()
-						d.SetFileName(fmt.Sprintf("%s.png", v))
+						d.SetFileName(v)
 						d.Download()
 					}(v)
 					time.Sleep(100 * time.Millisecond)
