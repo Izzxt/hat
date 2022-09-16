@@ -27,6 +27,7 @@ func TestGetAllImages(t *testing.T) {
 
 	c := client.NewClient()
 	d := downloader.NewDownloader(c)
+	d.SetDomain("com")
 	p := NewHotelView(*d, nil, nil)
 
 	i := p.GetAllImages()
