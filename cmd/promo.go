@@ -40,10 +40,10 @@ var promoCmd = &cobra.Command{
 			if Output != "" {
 				d.SetOutput(Output)
 			} else {
-				d.SetOutput("resource/c_images/reception")
+				d.SetOutput("resource/c_images/web_promo_small")
 			}
 			d.SetOther()
-			d.SetPath("/c_images/reception")
+			d.SetPath("/c_images/web_promo_small")
 			for _, v := range images {
 				exts := fs.IsFileExists(d.GetOutput(), v)
 				if !exts {
@@ -67,7 +67,7 @@ func init() {
 
 	// Cobra supports Persistent Flags which will work for this command
 	// and all subcommands, e.g.:
-	promoCmd.PersistentFlags().StringVarP(&promoName, "name", "n", "", "Hotel View Images Name for download single")
+	promoCmd.PersistentFlags().StringVarP(&promoName, "name", "n", "", "Web Promo Images Name for download single")
 
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
