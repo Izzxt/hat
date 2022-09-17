@@ -22,7 +22,7 @@ func CheckForUpdate(c client.Client) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	res := c.Get(fmt.Sprintf("https://api.github.com/repos/Izzxt/habbo-resource/releases/latest"))
+	res := c.Get(fmt.Sprintf("https://api.github.com/repos/Izzxt/hat/releases/latest"))
 
 	bytes, err := io.ReadAll(res.Body)
 	if err != nil {
