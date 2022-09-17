@@ -50,7 +50,6 @@ var articlesCmd = &cobra.Command{
 			} else {
 				d.SetOutput("resource/habbo-web-articles")
 			}
-			fmt.Println("Initializing...")
 			p := a.GetMaxPage()
 
 			for i := 1; i <= p-2; i++ {
