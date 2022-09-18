@@ -22,7 +22,7 @@ archives:
       - goos: windows
         format: zip
     files: 
-      - LICENSE.txt
+      - LICENSE
     replacements:
       darwin: macOS
 
