@@ -44,7 +44,7 @@ nfpms:
       - rpm
       - termux.deb
     contents:
-      - src: "~/.local/share/hat"
+      - src: "./.local/share/hat"
         dst: "/usr/local/bin/hat"
 
 # modelines, feel free to remove those if you don't want/use them:
