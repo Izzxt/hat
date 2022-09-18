@@ -31,8 +31,8 @@ jobs:
     - name: Test
       run: go test -v ./...
 
-    - name: Install Hat
-      run: make install && hat
+    - name: Build Hat
+      run: make build && hat
 
     - name: Download Habbo.swf
       run: hat habboswf
