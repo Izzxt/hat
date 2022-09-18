@@ -43,9 +43,6 @@ nfpms:
       - deb
       - rpm
       - termux.deb
-    contents:
-      - src: "./.local/share/hat"
-        dst: "/usr/local/bin/hat"
 
 # modelines, feel free to remove those if you don't want/use them:
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
