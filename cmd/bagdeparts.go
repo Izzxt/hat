@@ -1,5 +1,5 @@
 /*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
+Copyright © 2022 Izzat
 */
 package cmd
 
@@ -16,10 +16,9 @@ import (
 
 var badgeName string
 
-// badgepartsCmd represents the bagdeparts command
 var badgepartsCmd = &cobra.Command{
 	Use:   "badgeparts",
-	Short: "A brief description of your command",
+	Short: "Download habbo group badgeparts",
 	Run: func(cmd *cobra.Command, args []string) {
 		var wg sync.WaitGroup
 
@@ -111,13 +110,5 @@ var badgepartsCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(badgepartsCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	badgepartsCmd.PersistentFlags().StringVarP(&badgeName, "name", "n", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// bagdepartsCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	badgepartsCmd.PersistentFlags().StringVarP(&badgeName, "name", "n", "", "Badge name without file extension")
 }

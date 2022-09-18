@@ -1,5 +1,5 @@
 /*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
+Copyright © 2022 Izzat
 */
 package cmd
 
@@ -16,10 +16,9 @@ import (
 
 var petName string
 
-// petsCmd represents the pets command
 var petsCmd = &cobra.Command{
 	Use:   "pets",
-	Short: "A brief description of your command",
+	Short: "Download habbo pets",
 	Run: func(cmd *cobra.Command, args []string) {
 		var wg sync.WaitGroup
 
@@ -75,13 +74,5 @@ var petsCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(petsCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	petsCmd.PersistentFlags().StringVarP(&petName, "name", "n", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// petsCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	petsCmd.PersistentFlags().StringVarP(&petName, "name", "n", "", "Pet name without file extension")
 }

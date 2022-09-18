@@ -1,5 +1,5 @@
 /*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
+Copyright © 2022 Izzat
 */
 package cmd
 
@@ -16,10 +16,9 @@ import (
 
 var hotelViewName string
 
-// hotelviewCmd represents the hotelview command
 var hotelviewCmd = &cobra.Command{
 	Use:   "hotelview",
-	Short: "A brief description of your command",
+	Short: "Download habbo hotel view",
 	Run: func(cmd *cobra.Command, args []string) {
 		var wg sync.WaitGroup
 		var mu sync.Mutex
@@ -62,13 +61,5 @@ var hotelviewCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(hotelviewCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	hotelviewCmd.PersistentFlags().StringVarP(&hotelViewName, "name", "n", "", "Hotel View Images Name for download single")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// hotelviewCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	hotelviewCmd.PersistentFlags().StringVarP(&hotelViewName, "name", "n", "", "Image name without file extension")
 }

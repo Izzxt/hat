@@ -1,5 +1,5 @@
 /*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
+Copyright © 2022 Izzat
 */
 package cmd
 
@@ -16,10 +16,9 @@ import (
 
 var mp3Name string
 
-// mp3Cmd represents the mp3 command
 var mp3Cmd = &cobra.Command{
 	Use:   "mp3",
-	Short: "A brief description of your command",
+	Short: "Download habbo mp3 songs",
 	Run: func(cmd *cobra.Command, args []string) {
 
 		c := client.NewClient()
@@ -69,13 +68,5 @@ var mp3Cmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(mp3Cmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	mp3Cmd.PersistentFlags().StringVarP(&mp3Name, "name", "n", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// mp3Cmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	mp3Cmd.PersistentFlags().StringVarP(&mp3Name, "name", "n", "", "MP3 name without file extension")
 }

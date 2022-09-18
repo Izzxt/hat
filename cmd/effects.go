@@ -1,5 +1,5 @@
 /*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
+Copyright © 2022 Izzat
 */
 package cmd
 
@@ -19,10 +19,9 @@ import (
 
 var effectName string
 
-// effectsCmd represents the effects command
 var effectsCmd = &cobra.Command{
 	Use:   "effects",
-	Short: "A brief description of your command",
+	Short: "Download habbo effects",
 	Run: func(cmd *cobra.Command, args []string) {
 		var wg sync.WaitGroup
 		var mu sync.Mutex
@@ -78,13 +77,5 @@ var effectsCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(effectsCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	effectsCmd.PersistentFlags().StringVarP(&effectName, "name", "n", "", "Effect name to download single")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// effectsCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	effectsCmd.PersistentFlags().StringVarP(&effectName, "name", "n", "", "Effects name without file extension")
 }

@@ -1,5 +1,5 @@
 /*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
+Copyright © 2022 Izzat
 */
 package cmd
 
@@ -18,10 +18,9 @@ import (
 var furniName string
 var furniRevision string
 
-// furniCmd represents the furni command
 var furniCmd = &cobra.Command{
-	Use:   "furni",
-	Short: "A brief description of your command",
+	Use:   "furni [icons]",
+	Short: "Download habbo furni or icons",
 	Run: func(cmd *cobra.Command, args []string) {
 		var wg sync.WaitGroup
 		var mu sync.Mutex
@@ -106,7 +105,9 @@ var furniCmd = &cobra.Command{
 						}
 						wg.Wait()
 					}
-				}
+				} else {
+          fmt.Printf("No such command : %s", args[0])
+        }
 			}
 		}
 	},
@@ -115,14 +116,6 @@ var furniCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(furniCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	furniCmd.PersistentFlags().StringVarP(&furniName, "name", "n", "", "A help for foo")
-	furniCmd.PersistentFlags().StringVarP(&furniRevision, "revision", "r", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// furniCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	furniCmd.PersistentFlags().StringVarP(&furniName, "name", "n", "", "Furni name without file extension")
+	furniCmd.PersistentFlags().StringVarP(&furniRevision, "revision", "r", "", "Furni revision")
 }

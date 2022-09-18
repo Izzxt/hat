@@ -1,5 +1,5 @@
 /*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
+Copyright © 2022 Izzat
 */
 package cmd
 
@@ -16,10 +16,9 @@ import (
 
 var iconName string
 
-// iconsCmd represents the icons command
 var iconsCmd = &cobra.Command{
 	Use:   "icons",
-	Short: "A brief description of your command",
+	Short: "Download habbo catalogue icons",
 	Run: func(cmd *cobra.Command, args []string) {
 
 		c := client.NewClient()
@@ -70,13 +69,5 @@ var iconsCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(iconsCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	iconsCmd.PersistentFlags().StringVarP(&iconName, "name", "n", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// iconsCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	iconsCmd.PersistentFlags().StringVarP(&iconName, "name", "n", "", "Icon name without file extension")
 }

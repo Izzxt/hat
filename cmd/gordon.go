@@ -1,5 +1,5 @@
 /*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
+Copyright © 2022 Izzat
 */
 package cmd
 
@@ -13,12 +13,20 @@ import (
 	"github.com/spf13/cobra"
 )
 
-// gordonCmd represents the gordon command
 var (
 	gordonType string
 	gordonCmd  = &cobra.Command{
-		Use:   "gordon",
-		Short: "A brief description of your command",
+		Use:   "gordon [FLAGS]",
+		Short: "Download habbo gordon assets",
+    Long: `
+Available Types:
+  - HabboConfig
+  - HabboAvatarActions
+  - HabboRoomContent
+  - PlaceHolderFurniture
+  - PlaceHolderPet
+  - PlaceHolderWallItem
+    `,
 		Run: func(cmd *cobra.Command, args []string) {
 			c := client.NewClient()
 			d := downloader.NewDownloader(c)
@@ -88,13 +96,5 @@ var (
 func init() {
 	rootCmd.AddCommand(gordonCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
 	gordonCmd.PersistentFlags().StringVarP(&gordonType, "type", "t", "", "Gordon type")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// gordonCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }

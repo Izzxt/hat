@@ -1,5 +1,5 @@
 /*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
+Copyright © 2022 Izzat
 */
 package cmd
 
@@ -17,10 +17,9 @@ import (
 
 var promoName string
 
-// promoCmd represents the hotelview command
 var promoCmd = &cobra.Command{
 	Use:   "promo",
-	Short: "A brief description of your command",
+	Short: "Download habbo web promo",
 	Run: func(cmd *cobra.Command, args []string) {
 		var wg sync.WaitGroup
 		var mu sync.Mutex
@@ -63,13 +62,5 @@ var promoCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(promoCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	promoCmd.PersistentFlags().StringVarP(&promoName, "name", "n", "", "Web Promo Images Name for download single")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// hotelviewCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	promoCmd.PersistentFlags().StringVarP(&promoName, "name", "n", "", "Image name without file extension")
 }

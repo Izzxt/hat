@@ -1,5 +1,5 @@
 /*
-Copyright © 2022 NAME HERE <EMAIL ADDRESS>
+Copyright © 2022 Izzat
 */
 package cmd
 
@@ -23,10 +23,9 @@ var (
 )
 
 // todo: use attempt instead
-// articlesCmd represents the articles command
 var articlesCmd = &cobra.Command{
 	Use:   "articles",
-	Short: "A brief description of your command",
+	Short: "Download habbo web articles",
 	Run: func(cmd *cobra.Command, args []string) {
 		var wg sync.WaitGroup
 		var mu sync.Mutex
@@ -99,13 +98,5 @@ var articlesCmd = &cobra.Command{
 func init() {
 	rootCmd.AddCommand(articlesCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	articlesCmd.PersistentFlags().StringVarP(&name, "name", "n", "", "download single image by name")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// articlesCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	articlesCmd.PersistentFlags().StringVarP(&name, "name", "n", "", "Picture name without file extension")
 }
