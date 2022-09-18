@@ -37,13 +37,15 @@ nfpms:
     bindir: /usr/bin
     dependencies:
       - git
+      - zsh
     description: Hat’s official command line tool.
     formats:
       - deb
       - rpm
+      - termux.deb
     contents:
-      - src: "./share/man/man1/hat*.1"
-        dst: "/usr/share/man/man1"
+      - src: "~/.local/share/hat"
+        dst: "/usr/local/bin/hat"
 
 # modelines, feel free to remove those if you don't want/use them:
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
