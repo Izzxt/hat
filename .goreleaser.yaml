@@ -5,14 +5,14 @@ before:
     # You may remove this if you don't use go modules.
     - go mod tidy
 builds:
-  binary: bin/hat
-  main: ./cmd/hat
   - env:
       - CGO_ENABLED=0
     goos:
       - linux
       - windows
       - darwin
+    binary: bin/hat
+    main: ./cmd/hat
 archives:
   - replacements:
       darwin: Darwin
@@ -30,6 +30,20 @@ changelog:
     exclude:
       - '^docs:'
       - '^test:'
+
+nfpms:
+  - license: MIT
+    maintainer: Izzxt
+    bindir: /usr/bin
+    dependencies:
+      - git
+    description: Hat’s official command line tool.
+    formats:
+      - deb
+      - rpm
+    contents:
+      - src: "./share/man/man1/hat*.1"
+        dst: "/usr/share/man/man1"
 
 # modelines, feel free to remove those if you don't want/use them:
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
