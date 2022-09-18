@@ -1,14 +1,14 @@
 run:
-	go run cmd/hat/hat.go
+	go run cmd/hat/main.go
 
 test:
-	go test -v -race \./...
+	go test -race \./...
 
 build:
-	go build -o bin/hat ./cmd/hat/hat.go
+	go build -o bin/hat ./cmd/hat/main.go
 
 install:
-	GOBIN=~/go/bin go install ./cmd/hat/hat.go
+	GOBIN=~/go/bin go install ./cmd/hat/main.go
 
 windows:
-	GOOS=windows go build cmd/hat/hat.go && curl --upload-file ./hat.exe https://free.keep.sh/hat.exe 
+	GOOS=windows go build cmd/hat/main.go && curl --upload-file ./hat.exe https://free.keep.sh/hat.exe 
