@@ -32,7 +32,6 @@ nfpms:
     bindir: /usr/bin
     dependencies:
       - git
-      - zsh
     description: Hat’s official command line tool.
     formats:
       - deb
