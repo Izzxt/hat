@@ -27,6 +27,5 @@ jobs:
       with:
         version: latest
         args: release --rm-dist
-        workdir: ./cmd/hat
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
