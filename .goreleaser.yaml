@@ -1,5 +1,7 @@
 # This is an example .goreleaser.yml file with some sensible defaults.
 # Make sure to check the documentation at https://goreleaser.com
+project_name: hat
+
 before:
   hooks:
     # You may remove this if you don't use go modules.
@@ -13,7 +15,6 @@ builds:
       - linux
       - windows
       - darwin
-    binary: bin/hat
 
 archives:
   - name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
@@ -30,8 +31,6 @@ nfpms:
   - license: MIT
     maintainer: Izzxt
     bindir: /usr/bin
-    dependencies:
-      - git
     description: Hat’s official command line tool.
     formats:
       - deb
