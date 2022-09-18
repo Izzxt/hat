@@ -5,7 +5,7 @@ test:
 	go test -race \./...
 
 build:
-	go build -o bin/hat ./cmd/hat/main.go
+	go build -o ~/go/bin/hat ./cmd/hat/main.go
 
 install:
 	GOBIN=~/go/bin go install ./cmd/hat/main.go
