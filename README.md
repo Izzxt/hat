@@ -41,12 +41,12 @@ Use "hat [command] --help" for more information about a command.
 
 ## Installation
 
-#### MacOS & Linux Homebrew
+### MacOS & Linux Homebrew
 ```sh
 TBD
 ```
 
-#### Linux
+### Linux
 #### Manual
 ```sh
 # Choose desired version, Architecture & target OS
@@ -56,5 +56,9 @@ export OS="linux"
 wget -q https://github.com/Izzxt/hat/releases/download/v${VERSION}/hat_${VERSION}_${OS}_${ARCH}.tar.gz && \
 tar -xf hat_${VERSION}_${OS}_${ARCH}.tar.gz && \
 chmod +x hat && \
-sudo mv hat /usr/local/bin/hat
+sudo mv hat /usr/bin/hat
+```
+### Windows
+```sh
+TBD
 ```
