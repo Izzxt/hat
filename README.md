@@ -72,7 +72,7 @@ scoop install hat
 # Download all files
 hat gamedata
 
-# If you provide optional flags, it will download single files
+# If you provide optional flags, it will download single file
 hat badges --code <badge code>
 ```
 

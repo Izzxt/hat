@@ -13,6 +13,7 @@ import (
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
 	"github.com/Izzxt/hat/files"
+	"github.com/Izzxt/hat/version"
 	"github.com/spf13/cobra"
 )
 
@@ -33,6 +34,7 @@ var articlesCmd = &cobra.Command{
 		keys := make(map[string]bool)
 		ch := make(chan articles.Result)
 		c := client.NewClient()
+		version.StartupMessage(c)
 		d := downloader.NewDownloader(c)
 		a := articles.NewArticles(&wg, *d, &mu)
 

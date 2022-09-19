@@ -8,6 +8,7 @@ import (
 
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
+	"github.com/Izzxt/hat/version"
 	"github.com/spf13/cobra"
 )
 
@@ -17,6 +18,7 @@ var habboswfCmd = &cobra.Command{
 	Long:  "",
 	Run: func(cmd *cobra.Command, args []string) {
 		c := client.NewClient()
+		version.StartupMessage(c)
 		d := downloader.NewDownloader(c)
 		d.SetDomain(Domain)
 		p := d.GetCurrentProduction()

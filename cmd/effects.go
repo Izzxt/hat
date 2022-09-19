@@ -13,6 +13,7 @@ import (
 	"github.com/Izzxt/hat/downloader"
 	"github.com/Izzxt/hat/effects"
 	"github.com/Izzxt/hat/files"
+	"github.com/Izzxt/hat/version"
 	"github.com/Izzxt/hat/xml"
 	"github.com/spf13/cobra"
 )
@@ -29,6 +30,7 @@ var effectsCmd = &cobra.Command{
 
 		keys := make(map[string]bool)
 		c := client.NewClient()
+		version.StartupMessage(c)
 		d := downloader.NewDownloader(c)
 		d.SetOutput(Output)
 		d.SetDomain(Domain)

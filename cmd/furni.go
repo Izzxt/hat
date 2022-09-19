@@ -12,6 +12,7 @@ import (
 	"github.com/Izzxt/hat/downloader"
 	"github.com/Izzxt/hat/files"
 	"github.com/Izzxt/hat/furnitures"
+	"github.com/Izzxt/hat/version"
 	"github.com/spf13/cobra"
 )
 
@@ -26,6 +27,7 @@ var furniCmd = &cobra.Command{
 		var mu sync.Mutex
 
 		c := client.NewClient()
+		version.StartupMessage(c)
 		d := downloader.NewDownloader(c)
 		d.SetOutput(Output)
 		d.SetDomain(Domain)

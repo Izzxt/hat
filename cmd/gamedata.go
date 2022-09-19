@@ -10,6 +10,7 @@ import (
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
 	"github.com/Izzxt/hat/files"
+	"github.com/Izzxt/hat/version"
 
 	"github.com/spf13/cobra"
 )
@@ -29,6 +30,7 @@ var (
 		Run: func(cmd *cobra.Command, args []string) {
 
 			c := client.NewClient()
+			version.StartupMessage(c)
 			d := downloader.NewDownloader(c)
 			d.SetDomain(Domain)
 

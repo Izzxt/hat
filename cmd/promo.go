@@ -12,6 +12,7 @@ import (
 	"github.com/Izzxt/hat/downloader"
 	"github.com/Izzxt/hat/files"
 	"github.com/Izzxt/hat/promo"
+	"github.com/Izzxt/hat/version"
 	"github.com/spf13/cobra"
 )
 
@@ -25,6 +26,7 @@ var promoCmd = &cobra.Command{
 		var mu sync.Mutex
 
 		c := client.NewClient()
+		version.StartupMessage(c)
 		d := downloader.NewDownloader(c)
 		d.SetDomain(Domain)
 		d.SetOutput(Output)
