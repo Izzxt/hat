@@ -39,14 +39,14 @@ Flags:
 Use "hat [command] --help" for more information about a command.
 ```
 
-## Installation
+## Install
 
-### MacOS & Linux Homebrew
+## MacOS & Linux Homebrew
 ```sh
 TBD
 ```
 
-### Linux
+## Linux
 #### Manual
 ```sh
 # Choose desired version, Architecture & target OS
@@ -58,7 +58,7 @@ tar -xf hat_${VERSION}_${OS}_${ARCH}.tar.gz && \
 chmod +x hat && \
 sudo mv hat /usr/bin/hat
 ```
-### Windows
+## Windows
 ```sh
 TBD
 ```
