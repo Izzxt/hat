@@ -12,7 +12,7 @@ import (
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
 	"github.com/Izzxt/hat/effects"
-	"github.com/Izzxt/hat/fs"
+	"github.com/Izzxt/hat/files"
 	"github.com/Izzxt/hat/xml"
 	"github.com/spf13/cobra"
 )
@@ -57,7 +57,7 @@ var effectsCmd = &cobra.Command{
 			for _, entry := range effect.Effect {
 				if _, value := keys[entry.Lib]; !value {
 					keys[entry.Lib] = true
-					exts := fs.IsFileExists(d.GetOutput(), fmt.Sprintf("%s.swf", entry.Lib))
+					exts := files.IsFileExists(d.GetOutput(), fmt.Sprintf("%s.swf", entry.Lib))
 					if !exts {
 						wg.Add(1)
 						go func(v xml.EffectAttr) {

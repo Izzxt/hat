@@ -10,7 +10,7 @@ import (
 
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
-	"github.com/Izzxt/hat/fs"
+	"github.com/Izzxt/hat/files"
 	"github.com/spf13/cobra"
 )
 
@@ -47,7 +47,7 @@ var mp3Cmd = &cobra.Command{
 				mimeType := http.DetectContentType(byte)
 
 				if mimeType == "application/octet-stream" {
-					exts := fs.IsFileExists(d.GetOutput(), fmt.Sprintf("sound_machine_sample_%d.mp3", i))
+					exts := files.IsFileExists(d.GetOutput(), fmt.Sprintf("sound_machine_sample_%d.mp3", i))
 					if !exts {
 						d.Download()
 						time.Sleep(100 * time.Millisecond)

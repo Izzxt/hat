@@ -12,7 +12,7 @@ import (
 	"github.com/Izzxt/hat/articles"
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
-	"github.com/Izzxt/hat/fs"
+	"github.com/Izzxt/hat/files"
 	"github.com/spf13/cobra"
 )
 
@@ -80,7 +80,7 @@ var articlesCmd = &cobra.Command{
 			defer wg.Wait()
 
 			for _, v := range after {
-				exts := fs.IsFileExists(d.GetOutput(), v)
+				exts := files.IsFileExists(d.GetOutput(), v)
 				if !exts {
 					wg.Add(1)
 					go func(v string) {

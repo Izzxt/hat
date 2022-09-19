@@ -9,7 +9,7 @@ import (
 
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
-	"github.com/Izzxt/hat/fs"
+	"github.com/Izzxt/hat/files"
 	"github.com/Izzxt/hat/hotelview"
 	"github.com/spf13/cobra"
 )
@@ -43,7 +43,7 @@ var hotelviewCmd = &cobra.Command{
 			d.SetOther()
 			d.SetPath("/c_images/reception")
 			for _, v := range images {
-				exts := fs.IsFileExists(d.GetOutput(), v)
+				exts := files.IsFileExists(d.GetOutput(), v)
 				if !exts {
 					go func(v string) {
 						wg.Add(1)

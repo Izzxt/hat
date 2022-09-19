@@ -12,7 +12,7 @@ import (
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/clothes"
 	"github.com/Izzxt/hat/downloader"
-	"github.com/Izzxt/hat/fs"
+	"github.com/Izzxt/hat/files"
 	"github.com/Izzxt/hat/xml"
 	"github.com/spf13/cobra"
 )
@@ -65,7 +65,7 @@ var clothesCmd = &cobra.Command{
 			for _, entry := range figure.Lib {
 				if _, value := keys[entry.Id]; !value {
 					keys[entry.Id] = true
-					exts := fs.IsFileExists(d.GetOutput(), fmt.Sprintf("/%s.swf", entry.Id))
+					exts := files.IsFileExists(d.GetOutput(), fmt.Sprintf("/%s.swf", entry.Id))
 					if !exts {
 						wg.Add(1)
 						go func(v xml.FigureLib) {

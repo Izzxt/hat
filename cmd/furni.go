@@ -10,7 +10,7 @@ import (
 
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
-	"github.com/Izzxt/hat/fs"
+	"github.com/Izzxt/hat/files"
 	"github.com/Izzxt/hat/furnitures"
 	"github.com/spf13/cobra"
 )
@@ -51,7 +51,7 @@ var furniCmd = &cobra.Command{
 				d.SetOther()
 
 				for _, v := range i {
-					exts := fs.IsFileExists(d.GetOutput(), v.Name)
+					exts := files.IsFileExists(d.GetOutput(), v.Name)
 					if !exts {
 						go func(v furnitures.Furni) {
 							wg.Add(1)
@@ -91,7 +91,7 @@ var furniCmd = &cobra.Command{
 						d.SetOther()
 
 						for _, v := range i {
-							exts := fs.IsFileExists(d.GetOutput(), v.Name)
+							exts := files.IsFileExists(d.GetOutput(), v.Name)
 							if !exts {
 								wg.Add(1)
 								go func(v furnitures.Furni) {
@@ -106,8 +106,8 @@ var furniCmd = &cobra.Command{
 						wg.Wait()
 					}
 				} else {
-          fmt.Printf("No such command : %s", args[0])
-        }
+					fmt.Printf("No such command : %s", args[0])
+				}
 			}
 		}
 	},

@@ -9,7 +9,7 @@ import (
 
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
-	"github.com/Izzxt/hat/fs"
+	"github.com/Izzxt/hat/files"
 
 	"github.com/spf13/cobra"
 )
@@ -181,7 +181,7 @@ var (
 				d.SetProduction(current)
 
 				for _, g := range gamedata {
-					exts := fs.IsFileExists(d.GetOutput(), g.file)
+					exts := files.IsFileExists(d.GetOutput(), g.file)
 					if !exts {
 
 						if g.path != "figuremap" && g.path != "effectmap" {

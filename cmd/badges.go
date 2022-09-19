@@ -11,7 +11,7 @@ import (
 	"github.com/Izzxt/hat/badges"
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
-	"github.com/Izzxt/hat/fs"
+	"github.com/Izzxt/hat/files"
 	"github.com/spf13/cobra"
 )
 
@@ -46,7 +46,7 @@ var badgesCmd = &cobra.Command{
 			d.SetOther()
 			d.SetPath("/c_images/album1584")
 			for _, v := range code {
-				exts := fs.IsFileExists(d.GetOutput(), fmt.Sprintf("%s.gif", v))
+				exts := files.IsFileExists(d.GetOutput(), fmt.Sprintf("%s.gif", v))
 				if !exts {
 					go func(v string) {
 						wg.Add(1)

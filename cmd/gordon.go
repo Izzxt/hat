@@ -9,7 +9,7 @@ import (
 
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
-	"github.com/Izzxt/hat/fs"
+	"github.com/Izzxt/hat/files"
 	"github.com/spf13/cobra"
 )
 
@@ -18,7 +18,7 @@ var (
 	gordonCmd  = &cobra.Command{
 		Use:   "gordon [FLAGS]",
 		Short: "Download habbo gordon assets",
-    Long: `
+		Long: `
 Available Types:
   - HabboConfig
   - HabboAvatarActions
@@ -79,7 +79,7 @@ Available Types:
 				}
 
 				for _, v := range gordon {
-					exts := fs.IsFileExists(d.GetOutput(), v)
+					exts := files.IsFileExists(d.GetOutput(), v)
 					if !exts {
 						go func(v string) {
 							d.SetFileName(v)

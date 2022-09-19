@@ -10,7 +10,7 @@ import (
 
 	"github.com/Izzxt/hat/client"
 	"github.com/Izzxt/hat/downloader"
-	"github.com/Izzxt/hat/fs"
+	"github.com/Izzxt/hat/files"
 	"github.com/spf13/cobra"
 )
 
@@ -47,7 +47,7 @@ var iconsCmd = &cobra.Command{
 				mimeType := http.DetectContentType(byte)
 
 				if mimeType == "image/png" {
-					exts := fs.IsFileExists(d.GetOutput(), fmt.Sprintf("icon_%d.png", i))
+					exts := files.IsFileExists(d.GetOutput(), fmt.Sprintf("icon_%d.png", i))
 
 					if !exts {
 						d.Download()
