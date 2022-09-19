@@ -41,12 +41,12 @@ brews:
       bin.install "hat"
 
 scoop:
-  - bucket:
-      owner: Izzxt
-      name: scoop-bucket
-    description: Hat is a CLI tool which provides the ability to download various files directly from Habbo.
-    folder: Scoops
-    license: MIT
+  bucket:
+    owner: Izzxt
+    name: scoop-bucket
+  description: Hat is a CLI tool which provides the ability to download various files directly from Habbo.
+  folder: Scoops
+  license: MIT
 
 nfpms:
   - license: MIT
