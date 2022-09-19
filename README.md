@@ -43,10 +43,11 @@ Use "hat [command] --help" for more information about a command.
 
 ## MacOS & Linux Homebrew
 ```sh
-TBD
+brew install Izzat/tap/hat
 ```
 
 ## Linux
+
 #### Manual
 ```sh
 # Choose desired version, Architecture & target OS
@@ -56,9 +57,32 @@ export OS="linux"
 wget -q https://github.com/Izzxt/hat/releases/download/v${VERSION}/hat_${VERSION}_${OS}_${ARCH}.tar.gz && \
 tar -xf hat_${VERSION}_${OS}_${ARCH}.tar.gz && \
 chmod +x hat && \
-sudo mv hat /usr/bin/hat
+sudo mv hat /usr/local/bin/hat
 ```
+
 ## Windows
 ```sh
-TBD
+scoop bucket add hat https://github.com/Izzxt/scoop-bucket.git
+scoop install hat
 ```
+
+## Usage Example
+*Reminder:* if you download single file, be aware of file does not output as what u expected. It will download but if you open the file it will show you 404 HTML code.
+```sh
+# Download all files
+hat gamedata
+
+# If you provide optional flags, it will download single files
+hat badges --code <badge code>
+```
+
+## Contributing
+Contributions, issues and feature requests are welcome!
+
+## Similar projects
+> Disclaimer: This project only for educational purpose, I create this project just to gain more knowledge in programming.
+
+  - [higoka/habbo-downloader](https://github.com/higoka/habbo-downloader)
+
+## Support
+Give a ⭐ if you like this project!
