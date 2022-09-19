@@ -29,24 +29,24 @@ archives:
       amd64: x86_64
 
 brews:
-  tap:
-    owner: Izzat
-    name: homebrew-tap
-  description: Hat is a CLI tool which provides the ability to download various files directly from Habbo.
-  folder: Formula
-  license: MIT
-  test: |
-    system "#{bin}/hat -h"
-  install: |
-    bin.install "hat"
+  - tap:
+      owner: Izzxt
+      name: homebrew-tap
+    description: Hat is a CLI tool which provides the ability to download various files directly from Habbo.
+    folder: Formula
+    license: MIT
+    test: |
+      system "#{bin}/hat -h"
+    install: |
+      bin.install "hat"
 
 scoop:
-  bucket:
-    owner: Izzat
-    name: scoop-bucket
-  description: Hat is a CLI tool which provides the ability to download various files directly from Habbo.
-  folder: Scoops
-  license: MIT
+  - bucket:
+      owner: Izzxt
+      name: scoop-bucket
+    description: Hat is a CLI tool which provides the ability to download various files directly from Habbo.
+    folder: Scoops
+    license: MIT
 
 nfpms:
   - license: MIT
