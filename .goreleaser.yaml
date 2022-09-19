@@ -32,6 +32,7 @@ brews:
   - tap:
       owner: Izzxt
       name: homebrew-tap
+      token: "{{ .Env.GITHUB_TOKEN }}"
     description: Hat is a CLI tool which provides the ability to download various files directly from Habbo.
     folder: Formula
     license: MIT
