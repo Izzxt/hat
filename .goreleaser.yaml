@@ -28,8 +28,18 @@ archives:
       darwin: darwin
       amd64: x86_64
 
+nfpms:
+  - license: MIT
+    maintainer: Izzxt
+    bindir: /usr/bin
+    description: Hat’s official command line tool.
+    formats:
+      - deb
+      - rpm
+
 brews:
-  - tap:
+  - 
+    tap:
       owner: Izzxt
       name: homebrew-tap
       token: "{{ .Env.GITHUB_TOKEN }}"
@@ -48,15 +58,6 @@ scoop:
   description: Hat is a CLI tool which provides the ability to download various files directly from Habbo.
   folder: Scoops
   license: MIT
-
-nfpms:
-  - license: MIT
-    maintainer: Izzxt
-    bindir: /usr/bin
-    description: Hat’s official command line tool.
-    formats:
-      - deb
-      - rpm
 
 # modelines, feel free to remove those if you don't want/use them:
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
