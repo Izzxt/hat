@@ -61,12 +61,12 @@ func TestGetAllImages(t *testing.T) {
 	a := NewArticles(&wg, *d, &mu)
 	p := a.GetMaxPage()
 
-	for i := 1; i <= p-2; i++ {
+	for i := 1; i <= p; i++ {
 		wg.Add(1)
 		go a.FetchAll(fmt.Sprintf("all_%d.html", i), ch)
 	}
 
-	for i := 1; i <= p-2; i++ {
+	for i := 1; i <= p; i++ {
 		select {
 		case msg := <-ch:
 			assert.Regexp(regexp.MustCompile("section"), string(msg.Response))
@@ -89,12 +89,12 @@ func TestGetAllImagesWithRegex(t *testing.T) {
 	a := NewArticles(&wg, *d, &mu)
 	p := a.GetMaxPage()
 
-	for i := 1; i <= p-2; i++ {
+	for i := 1; i <= p; i++ {
 		wg.Add(1)
 		go a.FetchAll(fmt.Sprintf("all_%d.html", i), ch)
 	}
 
-	for i := 1; i <= p-2; i++ {
+	for i := 1; i <= p; i++ {
 		select {
 		case msg := <-ch:
 			assert.Regexp(regexp.MustCompile("section"), string(msg.Response))
