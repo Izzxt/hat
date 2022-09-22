@@ -60,7 +60,6 @@ func (ar *Article) GetMaxPage() int {
 		d.SetFileName(fmt.Sprintf("all_%d.html", i))
 
 		o, c := d.Fetch()
-		fmt.Printf("all_%d.html %d\n", i, c)
 
 		match, _ := regexp.MatchString("<section>", string(o))
 
