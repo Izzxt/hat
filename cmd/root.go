@@ -34,7 +34,7 @@ func init() {
 
 	rootCmd.PersistentFlags().StringVarP(&Output, "output", "o", "", "Folder output")
 	rootCmd.PersistentFlags().StringVarP(&Domain, "domain", "d", "com", "com.br, com.tr, com, de, es, fi, fr, it, nl")
-	rootCmd.PersistentFlags().StringVarP(&CfgFile, "config", "c", "", "Config file")
+	// rootCmd.PersistentFlags().StringVarP(&CfgFile, "config", "c", "", "Config file")
 	rootCmd.PersistentFlags().StringVarP(&Prod, "production", "p", "", "Habbo gordon production")
 }
 
