@@ -2,6 +2,7 @@ package articles
 
 import (
 	"fmt"
+	"regexp"
 	"sync"
 
 	"github.com/Izzxt/hat/downloader"
@@ -45,23 +46,38 @@ func (ar *Article) FetchAll(name string, ch chan Result) {
 }
 
 func (ar *Article) GetMaxPage() int {
-	i := 1
 	d := ar.downloader
 	d.SetDomain("com")
 	d.SetOther()
 	d.SetPath("/habbo-web-news/en/production")
 
-	for {
+	total := 0
+	i := 1
+	run := true
+	attempt := 0
+
+	for run {
 		d.SetFileName(fmt.Sprintf("all_%d.html", i))
 
-		_, c := d.Fetch()
+		o, c := d.Fetch()
+		fmt.Printf("all_%d.html %d\n", i, c)
 
-		i++
+		match, _ := regexp.MatchString("<section>", string(o))
+
+		if match {
+			total += 1
+		}
 
 		if c == 404 {
-			break
+			attempt++
 		}
+
+		if attempt > 5 {
+			run = false
+		}
+
+		i++
 	}
 
-	return i
+	return total
 }

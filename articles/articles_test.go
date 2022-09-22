@@ -48,7 +48,7 @@ func TestGetMaxPage(t *testing.T) {
 
 	p := a.GetMaxPage()
 
-	assert.Equal(129, p)
+	assert.Equal(127, p)
 
 }
 

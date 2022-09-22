@@ -23,7 +23,6 @@ var (
 	after []string
 )
 
-// todo: use attempt instead
 var articlesCmd = &cobra.Command{
 	Use:   "articles",
 	Short: "Download habbo web articles",
@@ -53,12 +52,12 @@ var articlesCmd = &cobra.Command{
 			}
 			p := a.GetMaxPage()
 
-			for i := 1; i <= p-2; i++ {
+			for i := 1; i <= p; i++ {
 				wg.Add(1)
 				go a.FetchAll(fmt.Sprintf("all_%d.html", i), ch)
 			}
 
-			for i := 1; i <= p-2; i++ {
+			for i := 1; i <= p; i++ {
 				select {
 				case msg := <-ch:
 					data = append(data, string(msg.Response))
