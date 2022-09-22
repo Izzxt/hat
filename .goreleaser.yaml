@@ -28,6 +28,11 @@ archives:
       darwin: darwin
       amd64: x86_64
 
+changelog:
+  sort: 'asc'
+  filters:
+    exclude: ['^docs:', '^test:', 'Merge pull request', 'Merge branch', 'go mod tidy']
+
 nfpms:
   - license: MIT
     maintainer: Izzxt
