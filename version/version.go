@@ -54,7 +54,7 @@ func StartupMessage(c client.Client) {
 	fmt.Println("     |::.|:. |     |::.|:. |       |::.|         |::.|        |::.| ")
 	fmt.Println("     `--- ---'     `--- ---'       `---'         `---'        `---' ")
 	fmt.Println()
-	fmt.Println("      -=- Discord @ Izzat#0333 -=-            -=- Version @ v1.1 -=-")
+	fmt.Printf("      -=- Discord @ Izzat#0333 -=-        -=- Version @ v%s -=-", Version)
 	fmt.Println()
 	CheckForUpdate(c)
 	fmt.Println()
