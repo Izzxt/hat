@@ -35,7 +35,6 @@ var petsCmd = &cobra.Command{
 		}
 
 		d.SetProduction(Prod)
-		// d.SetPath("/")
 		if petName != "" {
 			d.SetFileName(fmt.Sprintf("%s.swf", petName))
 			d.Download()

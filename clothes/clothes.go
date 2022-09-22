@@ -34,7 +34,6 @@ func (c *Clothes) Download(fileName string, out string) {
 	d.SetDomain("com")
 	d.SetGordon()
 	d.SetProduction(out)
-	// d.SetPath("/")
 	d.SetFileName(fmt.Sprintf("/%s.swf", fileName))
 
 	d.Download()

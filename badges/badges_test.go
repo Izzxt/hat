@@ -39,7 +39,6 @@ func TestGetAllCode(t *testing.T) {
 	var wg *sync.WaitGroup
 	var mu *sync.Mutex
 
-	// assert := assert.New(t)
 	c := client.NewClient()
 	d := downloader.NewDownloader(c)
 	b := NewBadges(*d, wg, mu)
