@@ -66,6 +66,9 @@ scoop bucket add hat https://github.com/Izzxt/scoop-bucket.git
 scoop install hat
 ```
 
+Alternatively you can download `deb`, `rpm` or `windows` from [release pages](https://github.com/Izzxt/hat/releases)  
+you need to add the binaries to System [PATH](https://docs.oracle.com/en/database/oracle/machine-learning/oml4r/1.5.1/oread/creating-and-modifying-environment-variables-on-windows.html#GUID-DD6F9982-60D5-48F6-8270-A27EC53807D0) if you want to use it as command line.
+
 ## Usage Example
 *Reminder:* if you download single file, be aware of file does not output as what u expected. It will download but if you open the file it will show you 404 HTML code.
 ```sh
