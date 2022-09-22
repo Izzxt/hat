@@ -43,7 +43,7 @@ Use "hat [command] --help" for more information about a command.
 
 ## MacOS & Linux Homebrew
 ```sh
-brew install Izzat/tap/hat
+brew install Izzxt/tap/hat
 ```
 
 ## Linux
