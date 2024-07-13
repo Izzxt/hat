@@ -1,3 +1,4 @@
+version: 2
 # This is an example .goreleaser.yml file with some sensible defaults.
 # Make sure to check the documentation at https://goreleaser.com
 project_name: hat
@@ -22,16 +23,16 @@ archives:
     format_overrides:
       - goos: windows
         format: zip
-    files: 
+    files:
       - LICENSE
     replacements:
       darwin: darwin
       amd64: x86_64
 
 changelog:
-  sort: 'asc'
+  sort: "asc"
   filters:
-    exclude: ['^docs:', '^test:', 'Merge pull request', 'Merge branch', 'go mod tidy']
+    exclude: ["^docs:", "^test:", "Merge pull request", "Merge branch", "go mod tidy"]
 
 nfpms:
   - license: MIT
@@ -43,8 +44,7 @@ nfpms:
       - rpm
 
 brews:
-  - 
-    tap:
+  - tap:
       owner: Izzxt
       name: homebrew-tap
       token: "{{ .Env.GITHUB_TOKEN }}"
@@ -62,7 +62,6 @@ scoop:
     name: scoop-bucket
   description: Hat is a CLI tool which provides the ability to download various files directly from Habbo.
   license: MIT
-
 # modelines, feel free to remove those if you don't want/use them:
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
 # vim: set ts=2 sw=2 tw=0 fo=cnqoj
