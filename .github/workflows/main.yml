@@ -37,6 +37,7 @@ jobs:
     steps:
       - name: List files
         run: ls -l
+        working-directory: hat
 
       - name: Run tests
         run: go test ./...
