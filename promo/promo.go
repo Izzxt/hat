@@ -36,8 +36,8 @@ func (h *Promo) GetAllImages() []string {
 	for _, d := range domain {
 		dw.SetDomain(d)
 		dw.SetPath("/external_flash_texts/0")
-		byte, _ := dw.Fetch()
-		match := matchRegex(string(byte))
+		bytes, _ := dw.Fetch()
+		match := matchRegex(string(bytes))
 		for _, entry := range match {
 			if _, value := keys[entry[1]]; !value {
 				keys[entry[1]] = true
