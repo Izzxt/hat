@@ -24,11 +24,15 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
+      - name: List files
+        run: ls -l
+
       - name: Set up Go
-        uses: actions/setup-go@v3
+        uses: actions/setup-go@v5
         with:
           go-version: 1.19
           cache: true
+          cache-dependency-path: hat
 
   test:
     runs-on: ubuntu-latest
