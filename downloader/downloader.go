@@ -174,7 +174,7 @@ func (g *Downloader) GetCurrentProduction() string {
 		log.Fatal(err)
 	}
 
-	r, _ := regexp.Compile(`(\\w+)*(PRODUCTION-[\d\w]+-[\d\w]+)`)
+	r, _ := regexp.Compile(`(\\w+)*(flash-assets-PRODUCTION-[\d\w]+-[\d\w]+)`)
 
 	m := r.FindString(string(bodyBytes))
 
