@@ -3,7 +3,6 @@ package downloader
 import (
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/url"
 	"os"
@@ -50,6 +49,8 @@ func NewDownloader(c client.Client) *Downloader {
 	return &Downloader{
 		client:   c,
 		isGordon: false,
+		isFurni:  false,
+		isImages: false,
 		isXml:    false,
 		isTxt:    false,
 		isSwf:    false,
@@ -86,7 +87,7 @@ func (g *Downloader) Fetch() ([]byte, int) {
 
 	resp := g.client.Get(url)
 
-	bodyBytes, err := ioutil.ReadAll(resp.Body)
+	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -104,6 +105,7 @@ func (g *Downloader) Download() int {
 		linkUrl = fmt.Sprintf("https://images.habbo.%s/dcr/hof_furni/%s/%s", g.domain, g.revision, g.fileName)
 	} else if g.isImages {
 		linkUrl = fmt.Sprintf("https://images.habbo.%s/c_images%s/%s", g.domain, g.pathUrl, g.fileName)
+		fmt.Println(linkUrl)
 	} else if g.isOther {
 		linkUrl = fmt.Sprintf("https://images.habbo.%s%s/%s", g.domain, g.pathUrl, g.fileName)
 	} else {
@@ -226,6 +228,18 @@ func (g *Downloader) SetTxt() {
 
 func (g *Downloader) SetGordon() {
 	g.isGordon = true
+}
+
+func (g *Downloader) SetFurni() {
+	g.isFurni = true
+}
+
+func (g *Downloader) SetImages() {
+	g.isImages = true
+}
+
+func (g *Downloader) SetSwf() {
+	g.isSwf = true
 }
 
 func (g *Downloader) SetProduction(production string) {
