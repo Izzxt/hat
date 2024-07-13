@@ -15,7 +15,8 @@ func TestGetAllEffectLib(t *testing.T) {
 	c := client.NewClient()
 	d := downloader.NewDownloader(c)
 
-	d.SetProduction("PRODUCTION-202209021210-342804575")
+	d.SetDomain("com")
+	d.SetProduction(d.GetCurrentProduction())
 
 	e := NewEffects(*d, nil, nil)
 
