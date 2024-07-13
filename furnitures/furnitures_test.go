@@ -19,6 +19,7 @@ func TestGetFurniIcons(t *testing.T) {
 	i := f.GetIcons()
 
 	fmt.Print(len(i))
+	fmt.Printf("%+v\n", i[0])
 	assert.Equal("shelves_norja_icon.png", i[0].Name)
 	assert.Equal("61856", i[0].Revision)
 }
@@ -33,6 +34,7 @@ func TestGetFurnis(t *testing.T) {
 	i := f.GetFurnis()
 
 	fmt.Print(len(i))
+	fmt.Printf("%+v\n", i[0])
 	assert.Equal("shelves_norja.swf", i[0].Name)
 	assert.Equal("61856", i[0].Revision)
 }
