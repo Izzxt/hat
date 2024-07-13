@@ -83,7 +83,7 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email github-actions@github.com
-          git remote add resource git@github.com:izzxt/habbo-resource.git
+          git remote add resource https://github.com/izzxt/habbo-resource.git
           git add .
           git commit --allow-empty -m "Commit from github actions"
           git pull resource master --rebase
