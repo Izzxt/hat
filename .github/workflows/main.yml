@@ -44,7 +44,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: setup
+    needs: test
     steps:
       - uses: actions/checkout@v3
 
@@ -59,7 +59,7 @@ jobs:
 
   download_habbo_swf:
     runs-on: ubuntu-latest
-    needs: setup
+    needs: build
     steps:
       - uses: actions/checkout@v3
 
