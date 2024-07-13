@@ -44,7 +44,7 @@ var promoCmd = &cobra.Command{
 				d.SetOutput("resource/c_images/web_promo_small")
 			}
 			d.SetOther()
-			d.SetPath("/c_images/web_promo_small")
+			d.SetPath("/web_promo_small")
 			for _, v := range images {
 				exts := files.IsFileExists(d.GetOutput(), v)
 				if !exts {
