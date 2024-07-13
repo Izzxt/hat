@@ -53,7 +53,7 @@ func (h *Promo) GetAllImages() []string {
 
 func matchRegex(findString string) [][]string {
 
-	m := regexp.MustCompile(`(?m)web_promo_small\/([\w].*.png)`)
+	m := regexp.MustCompile(`(?m)web_promo_small\/([\w]*(.+?)png)`)
 
 	return m.FindAllStringSubmatch(findString, -1)
 }
