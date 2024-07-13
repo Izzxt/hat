@@ -6,13 +6,12 @@ on:
   workflow_dispatch:
 
 jobs:
-  setup:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v3
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
           repository: izzxt/habbo-resource
           token: ${{ secrets.GH_PAT }}
@@ -23,38 +22,83 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
       - name: Set up Go
-        uses: actions/setup-go@v5
+        uses: actions/setup-go@v3
         with:
           go-version: 1.19
           cache: true
 
-  test:
-    runs-on: ubuntu-latest
-    needs: setup
-    steps:
-      - name: Run tests
-        run: go test ./...
+      - name: Test
+        run: go test -v ./...
 
-  build:
-    runs-on: ubuntu-latest
-    needs: test
-    steps:
-      - name: Build
+      - name: Build Hat
         run: make build && hat
 
-      - name: Upload Artifact
-        uses: actions/upload-artifact@master
-        with:
-          name: hat
-
-  habbo_swf:
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@master
-        with:
-          name: hat
-
-      - name: Download Habbo SWF
+      - name: Download Habbo.swf
         run: hat habboswf
+
+      - name: Download Badges
+        run: hat badges
+
+      - name: Download Promo
+        run: hat promo
+
+      - name: Download Reception
+        run: hat hotelview
+
+      - name: Download Effects
+        run: hat effects
+
+      - name: Download Badgeparts
+        run: hat badgeparts
+
+      - name: Download MP3
+        run: hat mp3
+
+      - name: Download Icons
+        run: hat icons
+
+      - name: Download Gordon
+        run: hat gordon
+
+      - name: Download Pets
+        run: hat mp3
+
+      - name: Download Articles
+        run: hat articles
+
+      - name: Download Gamedata
+        run: hat gamedata
+
+      - name: Download Clothes
+        run: hat clothes
+
+      - name: Download Furnitures Icons
+        run: hat furni icons
+
+      - name: Download Furnitures
+        run: hat furni
+
+      - name: Push to Habbo Resource
+        working-directory: resource
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email github-actions@github.com
+          git remote add resource git@github.com:izzxt/habbo-resource.git
+          git add .
+          git commit --allow-empty -m "Commit from github actions"
+          git pull resource master --rebase
+          git push -f resource master
+
+    # - uses: EndBug/add-and-commit@v7
+    #   with:
+    #     default_author: github_actions
+    #     add: resource
+
+    # - name: Tar files
+    #   run: tar -cvf resource.tar ./resource
+
+    # - name: Upload Artifact
+    #   uses: actions/upload-artifact@v3
+    #   with:
+    #     name: Habbo Resource
+    #     path: resource.tar
