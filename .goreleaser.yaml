@@ -18,16 +18,19 @@ builds:
       - darwin
 
 archives:
-  - name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}"
+  - name_template: >-
+      {{- .ProjectName }}_
+      {{- .Version }}_
+      {{- if eq .Arch "amd64" }}x86_64
+      {{- else if eq .Arch "386" }}i386
+      {{- else }}{{ .Arch }}{{ end }}
+      {{- if .Arm }}v{{ .Arm }}{{ end -}}
     format: tar.gz
     format_overrides:
       - goos: windows
         format: zip
     files:
       - LICENSE
-    replacements:
-      darwin: darwin
-      amd64: x86_64
 
 changelog:
   sort: "asc"
@@ -42,26 +45,25 @@ nfpms:
     formats:
       - deb
       - rpm
+# brews:
+#   - tap:
+#       owner: Izzxt
+#       name: homebrew-tap
+#       token: "{{ .Env.GITHUB_TOKEN }}"
+#     description: Hat is a CLI tool which provides the ability to download various files directly from Habbo.
+#     folder: Formula
+#     license: MIT
+#     test: |
+#       system "#{bin}/hat -h"
+#     install: |
+#       bin.install "hat"
 
-brews:
-  - tap:
-      owner: Izzxt
-      name: homebrew-tap
-      token: "{{ .Env.GITHUB_TOKEN }}"
-    description: Hat is a CLI tool which provides the ability to download various files directly from Habbo.
-    folder: Formula
-    license: MIT
-    test: |
-      system "#{bin}/hat -h"
-    install: |
-      bin.install "hat"
-
-scoop:
-  bucket:
-    owner: Izzxt
-    name: scoop-bucket
-  description: Hat is a CLI tool which provides the ability to download various files directly from Habbo.
-  license: MIT
+# scoops:
+#   bucket:
+#     owner: Izzxt
+#     name: scoop-bucket
+#   description: Hat is a CLI tool which provides the ability to download various files directly from Habbo.
+#   license: MIT
 # modelines, feel free to remove those if you don't want/use them:
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
 # vim: set ts=2 sw=2 tw=0 fo=cnqoj
