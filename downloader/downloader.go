@@ -162,14 +162,13 @@ func (g *Downloader) Download() int {
 }
 
 func (g *Downloader) GetCurrentProduction() string {
-
 	url := fmt.Sprintf("https://www.habbo.%s/gamedata/external_variables/0", g.domain)
 
 	resp := g.client.Get(url)
 
 	defer resp.Body.Close()
 
-	bodyBytes, err := ioutil.ReadAll(resp.Body)
+	bodyBytes, err := io.ReadAll(resp.Body)
 	if err != nil {
 		log.Fatal(err)
 	}

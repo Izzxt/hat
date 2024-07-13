@@ -3,7 +3,6 @@ package xml
 import (
 	"encoding/xml"
 	"io"
-	"io/ioutil"
 	"log"
 )
 
@@ -62,8 +61,7 @@ type EffectAttr struct {
 }
 
 func Parse(obj interface{}, xmlReader io.Reader) {
-
-	byteValue, err := ioutil.ReadAll(xmlReader)
+	byteValue, err := io.ReadAll(xmlReader)
 
 	if err != nil {
 		log.Fatalf("Error while trying to read xml : %s", err)
